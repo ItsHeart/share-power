@@ -1,21 +1,19 @@
 import React from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 
-import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		padding: "2px 4px",
 		display: "flex",
 		alignItems: "center",
-		width: 400,
 	},
 	input: {
 		marginLeft: theme.spacing(1),
@@ -30,67 +28,32 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const StyledMenu = withStyles({
-	paper: {
-		border: "1px solid #d3d4d5",
-	},
-})((props) => (
-	<Menu
-		elevation={40}
-		getContentAnchorEl={null}
-		anchorOrigin={{
-			vertical: "bottom",
-			horizontal: "center",
-		}}
-		transformOrigin={{
-			vertical: "top",
-			horizontal: "center",
-		}}
-		{...props}
-	/>
-));
-
-const StyledMenuItem = withStyles((theme) => ({
-	root: {
-		"&:focus": {
-			backgroundColor: theme.palette.primary.main,
-			"& .MuiListItemIcon-root, & .MuiListItemText-primary": {
-				color: theme.palette.common.white,
-			},
-		},
-	},
-}))(MenuItem);
-
 export default function Search() {
 	const classes = useStyles();
 
-	const [menu, setMenu] = React.useState(false);
+	const [selctType, setSelctType] = React.useState(0);
 
-	const handleClick = (event) => {
-		setMenu(event.currentTarget);
-	};
-
-	const handleClose = () => {
-		setMenu(false);
+	const handleChange = (event) => {
+		setSelctType(event.target.value);
 	};
 
 	return (
 		<Paper component="form" className={classes.root}>
-			<IconButton className={classes.iconButton} aria-label="menu">
-				<MenuIcon onClick={handleClick} />
-			</IconButton>
-			<StyledMenu anchorEl={menu} keepMounted open={menu} onClose={handleClose}>
-				<StyledMenuItem onClick={handleClose}>
-					<ListItemText primary="全部" />
-				</StyledMenuItem>
-				<StyledMenuItem onClick={handleClose}>
-					<ListItemText primary="PPT" />
-				</StyledMenuItem>
-			</StyledMenu>
-			<InputBase className={classes.input} placeholder="搜索" />
 			<IconButton type="submit" className={classes.iconButton}>
 				<SearchIcon />
 			</IconButton>
+			<InputBase className={classes.input} placeholder="搜索" />
+			<FormControl>
+				<Select
+					value={selctType}
+					onChange={handleChange}
+					style={{ padding: "2px 6px" }}>
+					<MenuItem value={0}>全部</MenuItem>
+					<MenuItem value={1}>文章</MenuItem>
+					<MenuItem value={2}>博客</MenuItem>
+					<MenuItem value={3}>资源</MenuItem>
+				</Select>
+			</FormControl>
 		</Paper>
 	);
 }

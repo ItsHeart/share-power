@@ -11,9 +11,6 @@ const theme = createMuiTheme({
 			main: deepOrange[500],
 		},
 	},
-	typography: {
-		fontFamily: ["PingFangSC-Ultralight"].join(","),
-	},
 	background: {
 		backgroundColor: "#f5f5f5",
 	},

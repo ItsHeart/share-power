@@ -12,39 +12,10 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 
+import { homeClass, commonClass } from "../assets/css";
 import theme from "../assets/theme";
-import background from "../assets/images/background.jpg";
 import SimpleCard from "../component/SimpleCard";
 import FullSearch from "../component/FullSearch";
-
-const thisClass = {
-	bigImage: {
-		backgroundImage: `URL(${background})`,
-		width: "1oovw",
-		height: "90vh",
-		overflow: "hidden",
-		border: "0",
-		display: "flex",
-		flexDirection: "column",
-		justifyContent: "center",
-		padding: "0 10vw",
-	},
-	whiteColor: {
-		color: "#fff",
-	},
-	root: {
-		display: "flex",
-		flexWrap: "wrap",
-		justifyContent: "space-around",
-		overflow: "hidden",
-		backgroundColor: theme.palette.background,
-		marginTop: "20px",
-	},
-	gridList: {
-		width: "92vw",
-		height: "auto",
-	},
-};
 
 function HideOnScroll(props) {
 	const { children, window } = props;
@@ -96,56 +67,42 @@ function HideAppBar() {
 				<CssBaseline />
 				<HideOnScroll>
 					<AppBar>
-						<Toolbar
-							style={{
-								display: "flex",
-								justifyContent: "space-between",
-							}}>
-							<Typography variant="h5" style={thisClass.whiteColor}>
+						<Toolbar style={commonClass.spaceBetween}>
+							<Typography variant="h5" style={homeClass.whiteColor}>
 								<Box fontWeight="fontWeightLight">Share Power</Box>
 							</Typography>
-							<Button size="large" style={thisClass.whiteColor}>
+							<Button size="large" style={homeClass.whiteColor}>
 								Login
 							</Button>
 						</Toolbar>
 					</AppBar>
 				</HideOnScroll>
-				<div
-					style={{
-						display: "flex",
-						justifyContent: "space-between",
-						position: "fixed",
-						width: "100%",
-						padding: "16px 24px",
-						alignItems: "center",
-					}}>
-					<Typography variant="h5" style={thisClass.whiteColor}>
+				<div style={homeClass.mainContent}>
+					<Typography variant="h5" style={homeClass.whiteColor}>
 						<Box fontWeight="fontWeightLight">Share Power</Box>
 					</Typography>
-					<div
-						style={{
-							display: "flex",
-							justifyContent: "space-between",
-						}}>
-						<Button size="large" style={thisClass.whiteColor}>
+					<div style={commonClass.spaceBetween}>
+						<Button size="large" style={homeClass.whiteColor}>
 							Login
 						</Button>
 					</div>
 				</div>
 			</ThemeProvider>
-			<div style={thisClass.bigImage}>
-				<FullSearch></FullSearch>
-				<Typography variant="h2" style={thisClass.whiteColor}>
+
+			<div style={homeClass.mian}>
+				<Typography variant="h2" style={homeClass.bigTitle}>
 					<Box>
 						Let's Share <font color="#ff5722">Power</font>
 					</Box>
 				</Typography>
+				<FullSearch></FullSearch>
 			</div>
-			<div style={thisClass.root}>
+
+			<div style={homeClass.root}>
 				<GridList
 					cellHeight={400}
 					spacing={10}
-					style={thisClass.gridList}
+					style={homeClass.gridList}
 					cols={3}>
 					{cardData.map((card) => (
 						<GridListTile key={card.image} cols={card.cols || 1}>
