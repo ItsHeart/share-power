@@ -16,6 +16,7 @@ import { homeClass, commonClass } from "../assets/css";
 import theme from "../assets/theme";
 import SimpleCard from "../component/SimpleCard";
 import FullSearch from "../component/FullSearch";
+import ExploreMune from "../component/ExploreMune";
 
 function HideOnScroll(props) {
 	const { children, window } = props;
@@ -77,43 +78,44 @@ function HideAppBar() {
 						</Toolbar>
 					</AppBar>
 				</HideOnScroll>
-				<div style={homeClass.mainContent}>
+				<div style={homeClass.top}>
 					<Typography variant="h5" style={homeClass.whiteColor}>
 						<Box fontWeight="fontWeightLight">Share Power</Box>
 					</Typography>
 					<div style={commonClass.spaceBetween}>
+						<ExploreMune></ExploreMune>
 						<Button size="large" style={homeClass.whiteColor}>
 							Login
 						</Button>
 					</div>
 				</div>
+
+				<div style={homeClass.mian}>
+					<Typography variant="h2" style={homeClass.bigTitle}>
+						<Box>
+							Let's Share <font color="#ff5722">Power</font>
+						</Box>
+					</Typography>
+					<FullSearch></FullSearch>
+				</div>
+
+				<div style={homeClass.root}>
+					<GridList
+						cellHeight={400}
+						spacing={10}
+						style={homeClass.gridList}
+						cols={3}>
+						{cardData.map((card) => (
+							<GridListTile key={card.image} cols={card.cols || 1}>
+								<SimpleCard
+									image={card.image}
+									title={card.title}
+									content={card.content}></SimpleCard>
+							</GridListTile>
+						))}
+					</GridList>
+				</div>
 			</ThemeProvider>
-
-			<div style={homeClass.mian}>
-				<Typography variant="h2" style={homeClass.bigTitle}>
-					<Box>
-						Let's Share <font color="#ff5722">Power</font>
-					</Box>
-				</Typography>
-				<FullSearch></FullSearch>
-			</div>
-
-			<div style={homeClass.root}>
-				<GridList
-					cellHeight={400}
-					spacing={10}
-					style={homeClass.gridList}
-					cols={3}>
-					{cardData.map((card) => (
-						<GridListTile key={card.image} cols={card.cols || 1}>
-							<SimpleCard
-								image={card.image}
-								title={card.title}
-								content={card.content}></SimpleCard>
-						</GridListTile>
-					))}
-				</GridList>
-			</div>
 		</React.Fragment>
 	);
 }

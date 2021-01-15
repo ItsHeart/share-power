@@ -4,21 +4,20 @@ import theme from "./theme";
 const homeClass = {
 	mian: {
 		backgroundImage: `URL(${background})`,
-		width: "1oovw",
 		height: "90vh",
 		overflow: "hidden",
 		border: "0",
 		display: "flex",
 		flexDirection: "column",
 		justifyContent: "center",
-		padding: "0 10vw",
+		padding: "0 15vw",
 	},
-	mainContent: {
+	top: {
 		display: "flex",
 		justifyContent: "space-between",
 		position: "fixed",
-		width: "100%",
-		padding: "16px 24px",
+		width: "100vw",
+		padding: "16px 40px 16px 24px",
 		alignItems: "center",
 	},
 	whiteColor: {

@@ -44,14 +44,10 @@ export default function Search() {
 			</IconButton>
 			<InputBase className={classes.input} placeholder="搜索" />
 			<FormControl>
-				<Select
-					value={selctType}
-					onChange={handleChange}
-					style={{ padding: "2px 6px" }}>
+				<Select value={selctType} onChange={handleChange}>
 					<MenuItem value={0}>全部</MenuItem>
-					<MenuItem value={1}>文章</MenuItem>
-					<MenuItem value={2}>博客</MenuItem>
-					<MenuItem value={3}>资源</MenuItem>
+					<MenuItem value={1}>博客</MenuItem>
+					<MenuItem value={2}>资源</MenuItem>
 				</Select>
 			</FormControl>
 		</Paper>
