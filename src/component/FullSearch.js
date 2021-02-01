@@ -9,26 +9,22 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
-const useStyles = makeStyles((theme) => ({
-	root: {
-		padding: "2px 4px",
-		display: "flex",
-		alignItems: "center",
-	},
-	input: {
-		marginLeft: theme.spacing(1),
-		flex: 1,
-	},
-	iconButton: {
-		padding: 10,
-	},
-	divider: {
-		height: 28,
-		margin: 4,
-	},
-}));
+export default function Search(props) {
+	const useStyles = makeStyles((theme) => ({
+		root: {
+			padding: "2px 4px",
+			display: "flex",
+			alignItems: "center",
+		},
+		input: {
+			marginLeft: theme.spacing(1),
+			flex: 1,
+		},
+		iconButton: {
+			padding: props.iconPadding,
+		},
+	}));
 
-export default function Search() {
 	const classes = useStyles();
 
 	const [selctType, setSelctType] = React.useState(0);

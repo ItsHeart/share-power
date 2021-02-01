@@ -44,6 +44,8 @@ const homeClass = {
 	},
 };
 
+const resourceClass = {};
+
 const commonClass = {
 	center: {
 		display: "flex",
@@ -56,4 +58,4 @@ const commonClass = {
 	},
 };
 
-export { homeClass, commonClass };
+export { homeClass, resourceClass, commonClass };

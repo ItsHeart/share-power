@@ -3,21 +3,44 @@ import Popover from "@material-ui/core/Popover";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import { useHistory } from "react-router-dom";
 import ListItemText from "@material-ui/core/ListItemText";
 
-function ListItemLink(props) {
-	return <ListItem button component="a" {...props} />;
-}
+const exploreItems = [
+	{
+		text: "全部",
+		type: "0",
+	},
+	{
+		text: "博客",
+		type: "1",
+	},
+	{
+		text: "资源",
+		type: "2",
+	},
+];
 
 export default function ExploreMune() {
-	const [anchorEl, setAnchorEl] = React.useState(null);
+	const [anchorEl, setAnchorEl] = React.useState(false);
+
+	const history = useHistory();
 
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
 
 	const handleClose = () => {
-		setAnchorEl(null);
+		setAnchorEl(false);
+	};
+
+	const explore = (type) => {
+		history.push({
+			pathname: "/Resource",
+			params: {
+				type: type,
+			},
+		});
 	};
 
 	const open = Boolean(anchorEl);
@@ -44,16 +67,16 @@ export default function ExploreMune() {
 					vertical: "top",
 					horizontal: "center",
 				}}>
-				<List component="nav" aria-label="secondary mailbox folders">
-					<ListItem button>
-						<ListItemText primary="全部" />
-					</ListItem>
-					<ListItemLink href="#simple-list">
-						<ListItemText primary="博客" />
-					</ListItemLink>
-					<ListItemLink href="#simple-list">
-						<ListItemText primary="资源" />
-					</ListItemLink>
+				<List component="nav">
+					{exploreItems.map((item) => (
+						<ListItem
+							button
+							style={{ padding: "4px 16px" }}
+							key={item.type}
+							onClick={() => explore(item.type)}>
+							<ListItemText primary={item.text} />
+						</ListItem>
+					))}
 				</List>
 			</Popover>
 		</div>

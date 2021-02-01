@@ -5,8 +5,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
+import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
 import IconButton from "@material-ui/core/IconButton";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Chip from "@material-ui/core/Chip";
@@ -60,8 +60,9 @@ export default function SimpleCard(props) {
 				<IconButton aria-label="add to favorites">
 					<FavoriteIcon style={{ color: theme.palette.secondary.main }} />
 				</IconButton>
-				<IconButton aria-label="share">
-					<ShareIcon style={{ color: theme.palette.primary.main }} />
+
+				<IconButton aria-label="add to favorites">
+					<ThumbDownIcon style={{ color: theme.palette.primary.main }} />
 				</IconButton>
 			</CardActions>
 		</Card>

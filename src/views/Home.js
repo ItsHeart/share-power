@@ -96,7 +96,7 @@ function HideAppBar() {
 							Let's Share <font color="#ff5722">Power</font>
 						</Box>
 					</Typography>
-					<FullSearch></FullSearch>
+					<FullSearch padding="2" iconPadding="10px" />
 				</div>
 
 				<div style={homeClass.root}>
