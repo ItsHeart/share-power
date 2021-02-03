@@ -12,6 +12,7 @@ import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Chip from "@material-ui/core/Chip";
 import { emphasize, withStyles } from "@material-ui/core/styles";
 import theme from "../assets/theme";
+import { useHistory } from "react-router-dom";
 
 const StyledBreadcrumb = withStyles((theme) => ({
 	root: {
@@ -34,8 +35,17 @@ export default function SimpleCard(props) {
 	if (props.content.length > 50) {
 		content = props.content.substr(0, 50) + "...";
 	}
+
+	const history = useHistory();
+	const detail = () => {
+		history.push({
+			pathname: "/Detail",
+			params: {},
+		});
+	};
+
 	return (
-		<Card theme={theme}>
+		<Card theme={theme} onClick={() => detail()}>
 			<CardActionArea>
 				<CardMedia
 					image={props.image}

@@ -1,6 +1,7 @@
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Home from "./views/Home";
 import Resource from "./views/Resource";
+import Detail from "./views/Detail";
 
 const BasicRoute = () => (
 	<Router>
@@ -12,6 +13,7 @@ const BasicRoute = () => (
 				component={Resource}
 				activeClassName="active"
 			/>
+			<Route exact path="/Detail" component={Detail} activeClassName="active" />
 		</Switch>
 	</Router>
 );
