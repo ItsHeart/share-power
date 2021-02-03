@@ -46,6 +46,20 @@ const homeClass = {
 
 const resourceClass = {};
 
+const detailClass = {
+	root: {
+		padding: "10px",
+	},
+	content: {
+		padding: "10px",
+		display: "flex",
+		justifyContent: "space-between",
+	},
+	img: {
+		width: "50%",
+	},
+};
+
 const commonClass = {
 	center: {
 		display: "flex",
@@ -58,4 +72,4 @@ const commonClass = {
 	},
 };
 
-export { homeClass, resourceClass, commonClass };
+export { homeClass, resourceClass, detailClass, commonClass };
