@@ -1,12 +1,11 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 
 import theme from "../assets/theme";
-import { homeClass } from "../assets/css";
+import { cardListClass } from "../assets/css";
 import SimpleCard from "../component/SimpleCard";
 import SelectControl from "../component/SelectControl";
 import NoramlAppbar from "../component/NoramlAppbar";
@@ -38,34 +37,27 @@ var cardData = [
 	},
 ];
 
-class Resource extends Component {
-	render() {
-		return (
-			<React.Fragment>
-				<ThemeProvider theme={theme}>
-					<CssBaseline />
-					<NoramlAppbar />
-					<SelectControl />
-					<div style={homeClass.root}>
-						<GridList
-							cellHeight={400}
-							spacing={10}
-							style={homeClass.gridList}
-							cols={3}>
-							{cardData.map((card) => (
-								<GridListTile key={card.image} cols={card.cols || 1}>
-									<SimpleCard
-										image={card.image}
-										title={card.title}
-										content={card.content}></SimpleCard>
-								</GridListTile>
-							))}
-						</GridList>
-					</div>
-				</ThemeProvider>
-			</React.Fragment>
-		);
-	}
+export default function Resource() {
+	const classes = cardListClass();
+	return (
+		<React.Fragment>
+			<ThemeProvider theme={theme}>
+				<CssBaseline />
+				<NoramlAppbar />
+				<SelectControl />
+				<div className={classes.root}>
+					<GridList cellHeight={400} spacing={10} cols={3}>
+						{cardData.map((card) => (
+							<GridListTile key={card.image} cols={card.cols || 1}>
+								<SimpleCard
+									image={card.image}
+									title={card.title}
+									content={card.content}></SimpleCard>
+							</GridListTile>
+						))}
+					</GridList>
+				</div>
+			</ThemeProvider>
+		</React.Fragment>
+	);
 }
-
-export default withRouter(Resource);

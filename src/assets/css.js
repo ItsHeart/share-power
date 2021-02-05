@@ -2,16 +2,13 @@ import background from "../assets/images/background.jpg";
 import { makeStyles } from "@material-ui/core/styles";
 import theme from "./theme";
 
-const homeClass = {
-	mian: {
-		backgroundImage: `URL(${background})`,
-		height: "90vh",
-		overflow: "hidden",
-		border: "0",
+const homeClass = makeStyles({
+	toolbar: {
 		display: "flex",
-		flexDirection: "column",
-		justifyContent: "center",
-		padding: "0 15vw",
+		justifyContent: "space-between",
+		"& button": {
+			color: "#fff",
+		},
 	},
 	top: {
 		display: "flex",
@@ -20,32 +17,46 @@ const homeClass = {
 		width: "100vw",
 		padding: "16px 40px 16px 24px",
 		alignItems: "center",
+		"& div": {
+			display: "flex",
+			justifyContent: "space-between",
+			"& button": {
+				color: "#fff",
+			},
+		},
 	},
-	whiteColor: {
-		color: "#fff",
-	},
-	bigTitle: {
-		color: "#fff",
+	main: {
+		backgroundImage: `URL(${background})`,
+		height: "90vh",
+		overflow: "hidden",
+		border: "0",
 		display: "flex",
+		flexDirection: "column",
 		justifyContent: "center",
-		alignContent: "center",
-		marginBottom: "10px",
+		padding: "0 15vw",
+		"& #bigTitle": {
+			color: "#fff",
+			display: "flex",
+			justifyContent: "center",
+			alignContent: "center",
+			marginBottom: "10px",
+		},
 	},
+});
+
+const cardListClass = makeStyles({
 	root: {
 		display: "flex",
 		flexWrap: "wrap",
 		justifyContent: "space-around",
 		overflow: "hidden",
-		backgroundColor: theme.palette.background,
 		marginTop: "20px",
+		"& .MuiGridList-root": {
+			width: "92vw",
+			height: "auto",
+		},
 	},
-	gridList: {
-		width: "92vw",
-		height: "auto",
-	},
-};
-
-const resourceClass = {};
+});
 
 const detailClass = makeStyles({
 	root: {
@@ -71,16 +82,4 @@ const detailClass = makeStyles({
 	},
 });
 
-const commonClass = {
-	center: {
-		display: "flex",
-		justifyContent: "center",
-		alignContent: "center",
-	},
-	spaceBetween: {
-		display: "flex",
-		justifyContent: "space-between",
-	},
-};
-
-export { homeClass, resourceClass, detailClass, commonClass };
+export { homeClass, detailClass, cardListClass };

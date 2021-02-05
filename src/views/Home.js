@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -12,7 +12,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 
-import { homeClass, commonClass } from "../assets/css";
+import { homeClass, cardListClass } from "../assets/css";
 import theme from "../assets/theme";
 import SimpleCard from "../component/SimpleCard";
 import FullSearch from "../component/FullSearch";
@@ -61,37 +61,40 @@ var cardData = [
 	},
 ];
 
-function HideAppBar() {
+export default function Home() {
+	const cardClasses = cardListClass();
+	const homeClasses = homeClass();
+
 	return (
 		<React.Fragment>
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<HideOnScroll>
 					<AppBar>
-						<Toolbar style={commonClass.spaceBetween}>
-							<Typography variant="h5" style={homeClass.whiteColor}>
-								<Box fontWeight="fontWeightLight">Share Power</Box>
+						<Toolbar className={homeClasses.toolbar}>
+							<Typography variant="h5">
+								<Box fontWeight="fontWeightLight" color="white">
+									Share Power
+								</Box>
 							</Typography>
-							<Button size="large" style={homeClass.whiteColor}>
-								Login
-							</Button>
+							<Button size="large">Login</Button>
 						</Toolbar>
 					</AppBar>
 				</HideOnScroll>
-				<div style={homeClass.top}>
-					<Typography variant="h5" style={homeClass.whiteColor}>
-						<Box fontWeight="fontWeightLight">Share Power</Box>
+				<div className={homeClasses.top}>
+					<Typography variant="h5">
+						<Box fontWeight="fontWeightLight" color="white">
+							Share Power
+						</Box>
 					</Typography>
-					<div style={commonClass.spaceBetween}>
+					<div>
 						<ExploreMune></ExploreMune>
-						<Button size="large" style={homeClass.whiteColor}>
-							Login
-						</Button>
+						<Button size="large">Login</Button>
 					</div>
 				</div>
 
-				<div style={homeClass.mian}>
-					<Typography variant="h2" style={homeClass.bigTitle}>
+				<div className={homeClasses.main}>
+					<Typography variant="h2" id="bigTitle">
 						<Box>
 							Let's Share <font color="#ff5722">Power</font>
 						</Box>
@@ -99,12 +102,8 @@ function HideAppBar() {
 					<FullSearch padding="2" iconPadding="10px" />
 				</div>
 
-				<div style={homeClass.root}>
-					<GridList
-						cellHeight={400}
-						spacing={10}
-						style={homeClass.gridList}
-						cols={3}>
+				<div className={cardClasses.root}>
+					<GridList cellHeight={400} spacing={10} cols={3}>
 						{cardData.map((card) => (
 							<GridListTile key={card.image} cols={card.cols || 1}>
 								<SimpleCard
@@ -118,10 +117,4 @@ function HideAppBar() {
 			</ThemeProvider>
 		</React.Fragment>
 	);
-}
-
-export default class Home extends Component {
-	render() {
-		return HideAppBar();
-	}
 }
