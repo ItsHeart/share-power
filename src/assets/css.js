@@ -1,4 +1,5 @@
 import background from "../assets/images/background.jpg";
+import { makeStyles } from "@material-ui/core/styles";
 import theme from "./theme";
 
 const homeClass = {
@@ -46,19 +47,29 @@ const homeClass = {
 
 const resourceClass = {};
 
-const detailClass = {
+const detailClass = makeStyles({
 	root: {
 		padding: "10px",
+		"& #content": {
+			padding: "10px",
+			display: "flex",
+			justifyContent: "space-between",
+			"& img": {
+				width: "50%",
+			},
+			"& #description": {
+				width: "48%",
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "space-between",
+				"& button": {
+					color: "white",
+					margin: theme.spacing(1),
+				},
+			},
+		},
 	},
-	content: {
-		padding: "10px",
-		display: "flex",
-		justifyContent: "space-between",
-	},
-	img: {
-		width: "50%",
-	},
-};
+});
 
 const commonClass = {
 	center: {

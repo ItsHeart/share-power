@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import FullSearch from "../component/FullSearch";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
 	whiteColor: {
@@ -21,11 +22,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NoramlAppbar(props) {
 	const classes = useStyles();
+
+	const history = useHistory();
+	const home = () => {
+		history.push({
+			pathname: "/",
+		});
+	};
 	return (
 		<AppBar position="static">
 			<Toolbar>
 				<Grid container spacing={3}>
-					<Grid item xs={2}>
+					<Grid item xs={2} onClick={() => home()}>
 						<Typography variant="h5" className={classes.home}>
 							<Box fontWeight="fontWeightLight">Share Power</Box>
 						</Typography>
