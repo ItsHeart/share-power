@@ -9,16 +9,16 @@ import ListItemText from "@material-ui/core/ListItemText";
 const exploreItems = [
 	{
 		text: "全部",
-		type: "0",
+		type: "0"
 	},
 	{
-		text: "博客",
-		type: "1",
+		text: "PPT",
+		type: "1"
 	},
 	{
 		text: "资源",
-		type: "2",
-	},
+		type: "2"
+	}
 ];
 
 export default function ExploreMune() {
@@ -38,8 +38,8 @@ export default function ExploreMune() {
 		history.push({
 			pathname: "/Resource",
 			params: {
-				type: type,
-			},
+				type: type
+			}
 		});
 	};
 
@@ -50,7 +50,7 @@ export default function ExploreMune() {
 			<Button
 				size="large"
 				style={{
-					color: "#FFF",
+					color: "#FFF"
 				}}
 				onClick={handleClick}>
 				Explore
@@ -61,11 +61,11 @@ export default function ExploreMune() {
 				onClose={handleClose}
 				anchorOrigin={{
 					vertical: "bottom",
-					horizontal: "center",
+					horizontal: "center"
 				}}
 				transformOrigin={{
 					vertical: "top",
-					horizontal: "center",
+					horizontal: "center"
 				}}>
 				<List component="nav">
 					{exploreItems.map((item) => (

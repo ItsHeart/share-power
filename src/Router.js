@@ -2,6 +2,7 @@ import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Home from "./views/Home";
 import Resource from "./views/Resource";
 import Detail from "./views/Detail";
+import Publish from "./views/Publish";
 
 const BasicRoute = () => (
 	<Router>
@@ -14,6 +15,12 @@ const BasicRoute = () => (
 				activeClassName="active"
 			/>
 			<Route exact path="/Detail" component={Detail} activeClassName="active" />
+			<Route
+				exact
+				path="/Publish"
+				component={Publish}
+				activeClassName="active"
+			/>
 		</Switch>
 	</Router>
 );

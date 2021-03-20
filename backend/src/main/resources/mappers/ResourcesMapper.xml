@@ -1,103 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.qx.sharepower.dto.ResourceDto">
-  <sql id="Base_Column_List">
-    id, publish_time , publisher ,`type`, cover, `describe`, up, down, `status`
+    <sql id="Base_Column_List">
+    id, publish_time , publisher ,`type`, grade , subject , cover, tags ,`describe`, up, down, `status`
   </sql>
-  <select id="getList" parameterType="java.lang.Integer" resultType="cn.qx.sharepower.model.Resource">
-    select 
-    <include refid="Base_Column_List" />
-    from resources
-    where status = '1';
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="getList" parameterType="java.lang.Integer" resultType="cn.qx.sharepower.model.Resource">
+        select
+        <include refid="Base_Column_List"/>
+        from resources
+        where status = '1';
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     update resources
     set status = '0'
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.qx.sharepower.model.Resource">
-    insert into resources
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="publishTime != null">
-        publish_time,
-      </if>
-      <if test="publisher != null">
-        publisher,
-      </if>
-      <if test="type != null">
-        `type`,
-      </if>
-      <if test="cover != null">
-        cover,
-      </if>
-      <if test="describe != null">
-        `describe`,
-      </if>
-      <if test="up != null">
-        up,
-      </if>
-      <if test="down != null">
-        down,
-      </if>
-      <if test="status != null">
-        `status`,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="publishTime != null">
-        #{publishTime},
-      </if>
-      <if test="publisher != null">
-        #{publisher,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="cover != null">
-        #{cover,jdbcType=VARCHAR},
-      </if>
-      <if test="describe != null">
-        #{describe,jdbcType=VARCHAR},
-      </if>
-      <if test="up != null">
-        #{up,jdbcType=INTEGER},
-      </if>
-      <if test="down != null">
-        #{down,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="update" parameterType="cn.qx.sharepower.model.Resource">
-    update resources
-    <set>
-      <if test="type != null">
-        `type` = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="cover != null">
-        cover = #{cover,jdbcType=VARCHAR},
-      </if>
-      <if test="describe != null">
-        `describe` = #{describe,jdbcType=VARCHAR},
-      </if>
-      <if test="up != null">
-        up = #{up,jdbcType=INTEGER},
-      </if>
-      <if test="down != null">
-        down = #{down,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        `status` = #{status,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    <insert id="insert" parameterType="cn.qx.sharepower.model.Resource">
+        insert into resources
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="publishTime != null">
+                publish_time,
+            </if>
+            <if test="publisher != null">
+                publisher,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="cover != null">
+                cover,
+            </if>
+            <if test="grade != null">
+                grade,
+            </if>
+            <if test="subject != null">
+                subject,
+            </if>
+            <if test="describe != null">
+                `describe`,
+            </if>
+            <if test="tag != null">
+                tag,
+            </if>
+            <if test="up != null">
+                up,
+            </if>
+            <if test="down != null">
+                down,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="publishTime != null">
+                #{publishTime},
+            </if>
+            <if test="publisher != null">
+                #{publisher,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="cover != null">
+                #{cover,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null">
+                #{grade,jdbcType=INTEGER},
+            </if>
+            <if test="subject != null">
+                #{subject,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="tags != null">
+                #{tags,jdbcType=VARCHAR},
+            </if>
+            <if test="up != null">
+                #{up,jdbcType=INTEGER},
+            </if>
+            <if test="down != null">
+                #{down,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="cn.qx.sharepower.model.Resource">
+        update resources
+        <set>
+            <if test="type != null">
+                `type` = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="cover != null">
+                cover = #{cover,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null">
+                grade = #{grade,jdbcType=INTEGER},
+            </if>
+            <if test="subject != null">
+                subject = #{subject,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null">
+                tag = #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                `describe` = #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="up != null">
+                up = #{up,jdbcType=INTEGER},
+            </if>
+            <if test="down != null">
+                down = #{down,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

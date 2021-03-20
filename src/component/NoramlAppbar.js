@@ -11,13 +11,13 @@ import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
 	whiteColor: {
-		color: "#fff",
+		color: "#fff"
 	},
 	home: {
 		color: "#fff",
 		userSelect: "none",
-		cursor: "pointer",
-	},
+		cursor: "pointer"
+	}
 }));
 
 export default function NoramlAppbar(props) {
@@ -26,9 +26,16 @@ export default function NoramlAppbar(props) {
 	const history = useHistory();
 	const home = () => {
 		history.push({
-			pathname: "/",
+			pathname: "/"
 		});
 	};
+
+	const publish = () => {
+		history.push({
+			pathname: "/Publish"
+		});
+	};
+
 	return (
 		<AppBar position="static">
 			<Toolbar>
@@ -42,6 +49,12 @@ export default function NoramlAppbar(props) {
 						<FullSearch padding="0" iconPadding="0 5px" />
 					</Grid>
 				</Grid>
+				<Button
+					size="large"
+					className={classes.whiteColor}
+					onClick={() => publish()}>
+					Publish
+				</Button>
 				<Button size="large" className={classes.whiteColor}>
 					Login
 				</Button>

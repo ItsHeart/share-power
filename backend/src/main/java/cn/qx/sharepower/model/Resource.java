@@ -7,9 +7,11 @@ import lombok.Data;
  * @Date: 2021/3/14 16:00
  */
 @Data
-public class Resources {
+public class Resource {
     private int id;
     private String type;
+    private int grade;
+    private String subject;
     /**
      * 资源地址
      */
@@ -18,6 +20,7 @@ public class Resources {
      * 封面地址
      */
     private String cover;
+    private String tags;
     private String describe;
     /**
      * 点赞

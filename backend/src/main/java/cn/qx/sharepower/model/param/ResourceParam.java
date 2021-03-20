@@ -7,5 +7,5 @@ import lombok.Data;
  * @Date: 2021/3/14 16:07
  */
 @Data
-public class ResourcesParam {
+public class ResourceParam {
 }

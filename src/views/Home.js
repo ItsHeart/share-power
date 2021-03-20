@@ -12,11 +12,12 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 
-import { homeClass, cardListClass } from "../assets/css";
-import theme from "../assets/theme";
-import SimpleCard from "../component/SimpleCard";
-import FullSearch from "../component/FullSearch";
-import ExploreMune from "../component/ExploreMune";
+import { homeClass, cardListClass } from "@/assets/css";
+import theme from "@/assets/theme";
+import SimpleCard from "@/component/SimpleCard";
+import FullSearch from "@/component/FullSearch";
+import ExploreMune from "@/component/ExploreMune";
+import { getList } from "@/api/resourceApi";
 
 function HideOnScroll(props) {
 	const { children, window } = props;
@@ -31,7 +32,7 @@ function HideOnScroll(props) {
 //参数检测
 HideOnScroll.propTypes = {
 	children: PropTypes.element.isRequired,
-	window: PropTypes.func,
+	window: PropTypes.func
 };
 
 var cardData = [
@@ -41,7 +42,7 @@ var cardData = [
 		title: ["文章", "信息技术", "大数据"],
 		content:
 			"最早提出“大数据”时代到来的是全球知名咨询公司麦肯锡，麦肯锡称：“数据，已经渗透到当今每一个行业和业务职能领域，成为重要的生产因素。人们对于海量数据的挖掘和运用，预示着新一波生产率增长和消费者盈余浪潮的到来",
-		cols: 1,
+		cols: 1
 	},
 	{
 		image:
@@ -49,7 +50,7 @@ var cardData = [
 		title: ["文章", "信息技术", "大数据"],
 		content:
 			"最早提出“大数据”时代到来的是全球知名咨询公司麦肯锡，麦肯锡称：“数据，已经渗透到当今每一个行业和业务职能领域，成为重要的生产因素。人们对于海量数据的挖掘和运用，预示着新一波生产率增长和消费者盈余浪潮的到来",
-		cols: 1,
+		cols: 1
 	},
 	{
 		image:
@@ -57,13 +58,18 @@ var cardData = [
 		title: ["文章", "信息技术", "大数据"],
 		content:
 			"最早提出“大数据”时代到来的是全球知名咨询公司麦肯锡，麦肯锡称：“数据，已经渗透到当今每一个行业和业务职能领域，成为重要的生产因素。人们对于海量数据的挖掘和运用，预示着新一波生产率增长和消费者盈余浪潮的到来",
-		cols: 1,
-	},
+		cols: 1
+	}
 ];
 
 export default function Home() {
 	const cardClasses = cardListClass();
 	const homeClasses = homeClass();
+	getList({})
+		.then((res) => {
+			console.log(res);
+		})
+		.catch(function (res) {});
 
 	return (
 		<React.Fragment>

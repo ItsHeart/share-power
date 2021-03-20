@@ -2,8 +2,8 @@ package cn.qx.sharepower.controller;
 
 
 import cn.qx.sharepower.model.JsonResult;
-import cn.qx.sharepower.model.param.ResourcesParam;
-import cn.qx.sharepower.service.ResourcesService;
+import cn.qx.sharepower.model.param.ResourceParam;
+import cn.qx.sharepower.service.ResourceService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,13 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("resources")
-public class ResourcesController {
+public class ResourceController {
 
-    private ResourcesService 
+    private ResourceService resourceService;
+
+    public ResourceController(ResourceService resourceService) {
+        this.resourceService = resourceService;
+    }
 
     @ResponseBody
     @PostMapping("/getList")
-    public JsonResult add(@RequestBody ResourcesParam resourcesParam){
-        return null;
+    public JsonResult add(@RequestBody ResourceParam resourcesParam){
+        return resourceService.getList(resourcesParam);
     }
 }

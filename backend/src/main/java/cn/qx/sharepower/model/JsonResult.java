@@ -1,4 +1,6 @@
-package cn.qx.sharesutil.model;
+package cn.qx.sharepower.model;
+
+import lombok.Data;
 
 import java.util.HashMap;
 
@@ -78,41 +80,6 @@ public class JsonResult extends HashMap<String, Object> {
     @Override
     public JsonResult put(String key, Object object) {
         super.put(key, object);
-        return this;
-    }
-
-    /**
-     * 返回成功
-     */
-    public JsonResult success(String key, Object object) {
-        super.put(key, object);
-        super.put("msg", "返回成功");
-        super.put("code", 200);
-        return this;
-    }
-    /**
-     * 返回成功
-     */
-    public JsonResult success(String message) {
-        super.put("msg", message );
-        super.put("code", 200);
-        return this;
-    }
-    /**
-     * 返回成功
-     */
-    public JsonResult success(Object object) {
-        super.put("info", object);
-        super.put("msg", "返回成功");
-        super.put("code", 200);
-        return this;
-    }
-    /**
-     * 返回失败
-     */
-    public JsonResult fail(String message) {
-        super.put("msg", message);
-        super.put("code", 204);
         return this;
     }
 }

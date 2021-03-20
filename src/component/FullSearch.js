@@ -14,15 +14,15 @@ export default function Search(props) {
 		root: {
 			padding: "2px 4px",
 			display: "flex",
-			alignItems: "center",
+			alignItems: "center"
 		},
 		input: {
 			marginLeft: theme.spacing(1),
-			flex: 1,
+			flex: 1
 		},
 		iconButton: {
-			padding: props.iconPadding,
-		},
+			padding: props.iconPadding
+		}
 	}));
 
 	const classes = useStyles();
@@ -42,7 +42,7 @@ export default function Search(props) {
 			<FormControl>
 				<Select value={selctType} onChange={handleChange}>
 					<MenuItem value={0}>全部</MenuItem>
-					<MenuItem value={1}>博客</MenuItem>
+					<MenuItem value={1}>PPT</MenuItem>
 					<MenuItem value={2}>资源</MenuItem>
 				</Select>
 			</FormControl>

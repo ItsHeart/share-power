@@ -1,4 +1,4 @@
-package cn.qx.sharesutil.config;
+package cn.qx.sharepower.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
