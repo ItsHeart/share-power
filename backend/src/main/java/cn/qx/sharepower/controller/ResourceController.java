@@ -5,10 +5,7 @@ import cn.qx.sharepower.model.JsonResult;
 import cn.qx.sharepower.model.param.ResourceParam;
 import cn.qx.sharepower.service.ResourceService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author: 丁晓诚
@@ -26,7 +23,13 @@ public class ResourceController {
 
     @ResponseBody
     @PostMapping("/getList")
-    public JsonResult add(@RequestBody ResourceParam resourcesParam){
+    public JsonResult getList(@RequestBody ResourceParam resourcesParam){
         return resourceService.getList(resourcesParam);
+    }
+
+    @ResponseBody
+    @GetMapping("/get")
+    public JsonResult get(int id){
+        return resourceService.get(id);
     }
 }

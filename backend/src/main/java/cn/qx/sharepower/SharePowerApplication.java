@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@MapperScan("cn.qx.sharepower.dto")
+@MapperScan("cn.qx.sharepower.dao")
 @EnableScheduling
 @EnableAsync
 public class SharePowerApplication {

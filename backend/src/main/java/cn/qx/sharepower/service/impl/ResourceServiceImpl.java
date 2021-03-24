@@ -1,6 +1,6 @@
 package cn.qx.sharepower.service.impl;
 
-import cn.qx.sharepower.dto.ResourceDto;
+import cn.qx.sharepower.dao.ResourceDao;
 import cn.qx.sharepower.model.JsonResult;
 import cn.qx.sharepower.model.Resource;
 import cn.qx.sharepower.model.param.ResourceParam;
@@ -16,18 +16,26 @@ import java.util.List;
 @Service
 public class ResourceServiceImpl implements ResourceService {
 
-    private ResourceDto resourceDto;
+    private ResourceDao resourceDao;
 
-    public ResourceServiceImpl(ResourceDto resourceDto) {
-        this.resourceDto = resourceDto;
+    public ResourceServiceImpl(ResourceDao resourceDao) {
+        this.resourceDao = resourceDao;
     }
 
 
     @Override
     public JsonResult getList(ResourceParam resourcesParam) {
-        List<Resource> resourceList = resourceDto.getList(resourcesParam);
+        List<Resource> resourceList = resourceDao.getList(resourcesParam);
         JsonResult jsonResult = JsonResult.ok();
         jsonResult.put("data",resourceList);
+        return jsonResult;
+    }
+
+    @Override
+    public JsonResult get(int id) {
+        Resource resource = resourceDao.getById(id);
+        JsonResult jsonResult = JsonResult.ok();
+        jsonResult.put("data",resource);
         return jsonResult;
     }
 }

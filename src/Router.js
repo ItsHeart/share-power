@@ -14,7 +14,12 @@ const BasicRoute = () => (
 				component={Resource}
 				activeClassName="active"
 			/>
-			<Route exact path="/Detail" component={Detail} activeClassName="active" />
+			<Route
+				exact
+				path="/Detail/:id"
+				component={Detail}
+				activeClassName="active"
+			/>
 			<Route
 				exact
 				path="/Publish"

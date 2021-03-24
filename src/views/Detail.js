@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -7,12 +8,24 @@ import Button from "@material-ui/core/Button";
 import PlayForWorkIcon from "@material-ui/icons/PlayForWork";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-import theme from "../assets/theme";
-import { detailClass } from "../assets/css";
-import NoramlAppbar from "../component/NoramlAppbar";
+import theme from "@/assets/theme";
+import { detailClass } from "@/assets/css";
+import NoramlAppbar from "@/component/NoramlAppbar";
+import { get } from "@/api/resourceApi";
 
 export default function Detail() {
 	const classes = detailClass();
+	const history = useHistory();
+	const [resourceData, setResourceData] = useState({});
+	const resourceId = history.location.pathname.split("/")[2];
+
+	useEffect(() => {
+		get(resourceId)
+			.then((res) => {
+				setResourceData(res.data);
+			})
+			.catch(function (res) {});
+	}, [resourceId]);
 
 	return (
 		<React.Fragment>
@@ -21,19 +34,14 @@ export default function Detail() {
 				<NoramlAppbar />
 				<div className={classes.root}>
 					<Paper id="content">
-						<img
-							src="https://cdn.pixabay.com/photo/2020/12/19/03/27/person-5843476__480.jpg"
-							alt="图片加载失败"
-						/>
+						<img src={resourceData.cover} alt="图片加载失败" />
 						<div id="description">
 							<Typography
 								variant="body2"
 								color="textSecondary"
 								component="span"
 								style={{ paddingTop: "5px" }}>
-								{
-									"最早提出“大数据”时代到来的是全球知名咨询公司麦肯锡，麦肯锡称：“数据，已经渗透到当今每一个行业和业务职能领域，成为重要的生产因素。人们对于海量数据的挖掘和运用，预示着新一波生产率增长和消费者盈余浪潮的到来"
-								}
+								{resourceData.describe}
 							</Typography>
 							<div>
 								<Button

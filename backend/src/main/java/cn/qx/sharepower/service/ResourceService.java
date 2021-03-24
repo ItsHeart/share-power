@@ -10,4 +10,5 @@ import cn.qx.sharepower.model.param.ResourceParam;
  */
 public interface ResourceService {
     JsonResult getList(ResourceParam resourcesParam);
+    JsonResult get(int id);
 }

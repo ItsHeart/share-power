@@ -6,7 +6,7 @@ spring:
     url: jdbc:mysql://121.4.195.162:3306/share_power?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&useTimezone=True&serverTimezone=GMT%2B8
     username: root
     password: 990907
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
   type-aliases-package: cn.qx.sharesutil.model

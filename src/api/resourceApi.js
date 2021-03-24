@@ -6,3 +6,9 @@ export const getList = (param) => {
 		param
 	);
 };
+
+export const get = (id) => {
+	return axios.get(
+		process.env.REACT_APP_BACKEND_URL + "resources/get?id=" + id
+	);
+};

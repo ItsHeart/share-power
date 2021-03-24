@@ -1,4 +1,4 @@
-package cn.qx.sharepower.dto;
+package cn.qx.sharepower.dao;
 
 import cn.qx.sharepower.model.Resource;
 import cn.qx.sharepower.model.param.ResourceParam;
@@ -11,7 +11,7 @@ import java.util.List;
  * @Date: 2021/3/14 13:06
  */
 @Repository
-public interface ResourceDto {
+public interface ResourceDao {
     List<Resource> getList(ResourceParam resourceParam);
     Resource getById(int id);
     void deleteByPrimaryKey(int id);
