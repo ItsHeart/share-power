@@ -13,6 +13,7 @@ import java.util.List;
 @Repository
 public interface ResourceDto {
     List<Resource> getList(ResourceParam resourceParam);
+    Resource getById(int id);
     void deleteByPrimaryKey(int id);
     void insert(Resource resource);
     void update(Resource resource);

@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.qx.sharepower.dto.ResourceDto">
+<mapper namespace="cn.qx.sharepower.dao.ResourceDao">
     <sql id="Base_Column_List">
-    id, publish_time , publisher ,`type`, grade , subject , cover, tags ,`describe`, up, down, `status`
-  </sql>
-    <select id="getList" parameterType="java.lang.Integer" resultType="cn.qx.sharepower.model.Resource">
+        id ,`type`, cover, tags ,`describe`
+    </sql>
+    <sql id="ALL_Column_List">
+        id, publish_time , publisher ,`type`, grade , subject , cover, tags ,`describe`, up, down, `status`
+    </sql>
+    <select id="getList" resultType="cn.qx.sharepower.model.Resource">
         select
         <include refid="Base_Column_List"/>
         from resources
         where status = '1';
+    </select>
+    <select id="getById" parameterType="java.lang.Integer" resultType="cn.qx.sharepower.model.Resource">
+        select
+        <include refid="ALL_Column_List"/>
+        from resources
+        where id = #{id}
+        and status = '1'
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     update resources
