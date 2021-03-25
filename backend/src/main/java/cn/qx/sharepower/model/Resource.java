@@ -2,6 +2,8 @@ package cn.qx.sharepower.model;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @Author: 丁晓诚
  * @Date: 2021/3/14 16:00
@@ -9,9 +11,12 @@ import lombok.Data;
 @Data
 public class Resource {
     private int id;
+    private String publisher;
+    private Date publishTime;
     private String type;
     private int grade;
     private String subject;
+    private String title;
     /**
      * 资源地址
      */

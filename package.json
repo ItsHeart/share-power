@@ -5,11 +5,13 @@
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
+    "@mui-treasury/components": "^1.10.1",
     "@mui-treasury/styles": "^1.13.1",
     "@testing-library/jest-dom": "^5.11.7",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
     "axios": "^0.21.1",
+    "mui-treasury": "^0.1.5-alpha.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.15.4",

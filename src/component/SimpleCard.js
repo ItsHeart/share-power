@@ -1,80 +1,72 @@
 import React from "react";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
-import ThumbDownIcon from "@material-ui/icons/ThumbDown";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import IconButton from "@material-ui/core/IconButton";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-import Chip from "@material-ui/core/Chip";
-import { emphasize, withStyles } from "@material-ui/core/styles";
-import theme from "../assets/theme";
 import { useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+import ChevronRightRounded from "@material-ui/icons/ChevronRightRounded";
+import TextInfoContent from "@mui-treasury/components/content/textInfo";
+import { useWideCardMediaStyles } from "@mui-treasury/styles/cardMedia/wide";
+import { useN01TextInfoContentStyles } from "@mui-treasury/styles/textInfoContent/n01";
+import { useBouncyShadowStyles } from "@mui-treasury/styles/shadow/bouncy";
 
-const StyledBreadcrumb = withStyles((theme) => ({
+import { transformDate } from "@/assets/commonApi";
+import Tag from "@/component/Tag";
+
+const useStyles = makeStyles(() => ({
 	root: {
-		backgroundColor: theme.palette.grey[100],
-		height: theme.spacing(3),
-		color: theme.palette.grey[800],
-		fontWeight: theme.typography.fontWeightRegular,
-		"&:hover, &:focus": {
-			backgroundColor: theme.palette.grey[300]
-		},
-		"&:active": {
-			boxShadow: theme.shadows[1],
-			backgroundColor: emphasize(theme.palette.grey[300], 0.12)
-		}
+		maxWidth: 304,
+		margin: "auto",
+		boxShadow: "none",
+		borderRadius: 0
+	},
+	content: {
+		padding: 24
+	},
+	more: {
+		marginTop: 24,
+		textTransform: "initial"
 	}
-}))(Chip);
+}));
 
-export default function SimpleCard(props) {
-	let content;
-	if (props.content.length > 50) {
-		content = props.content.substr(0, 50) + "...";
-	}
-
+export const SimpleCard = React.memo(function NewsCard(props) {
+	const styles = useStyles();
+	const mediaStyles = useWideCardMediaStyles();
+	const textCardContentStyles = useN01TextInfoContentStyles();
+	const shadowStyles = useBouncyShadowStyles();
 	const history = useHistory();
+	const data = props.data;
 	const detail = () => {
 		history.push({
-			pathname: "/Detail",
+			pathname: "/Detail/" + data.id,
 			params: {}
 		});
 	};
-
+	if (data.describe.length > 45) {
+		data.describe = data.describe.substr(0, 45) + "...";
+	}
 	return (
-		<Card theme={theme} onClick={() => detail()}>
-			<CardActionArea>
-				<CardMedia
-					image={props.image}
-					style={{ height: 0, paddingTop: "56.25%" }}
+		<Card className={(styles.root, shadowStyles.root)}>
+			<CardMedia classes={mediaStyles} image={data.cover} />
+			<CardContent className={styles.content}>
+				<TextInfoContent
+					classes={textCardContentStyles}
+					overline={transformDate(data.publishTime)}
+					heading={data.title}
+					body={data.describe}
 				/>
-				<CardContent>
-					<Breadcrumbs aria-label="breadcrumb">
-						<StyledBreadcrumb component="a" href="#" label={props.title[0]} />
-						<StyledBreadcrumb component="a" href="#" label={props.title[1]} />
-						<StyledBreadcrumb component="a" href="#" label={props.title[2]} />
-					</Breadcrumbs>
-					<Typography
-						variant="body2"
-						color="textSecondary"
-						component="p"
-						style={{ paddingTop: "5px" }}>
-						{content}
-					</Typography>
-				</CardContent>
-			</CardActionArea>
-			<CardActions style={{ height: "50px" }}>
-				<IconButton aria-label="add to favorites">
-					<FavoriteIcon style={{ color: theme.palette.secondary.main }} />
-				</IconButton>
-
-				<IconButton aria-label="add to favorites">
-					<ThumbDownIcon style={{ color: theme.palette.primary.main }} />
-				</IconButton>
-			</CardActions>
+				<Button
+					color={"primary"}
+					fullWidth
+					className={styles.more}
+					onClick={() => detail()}>
+					了解更多
+					<ChevronRightRounded />
+				</Button>
+			</CardContent>
 		</Card>
 	);
-}
+});
+
+export default SimpleCard;

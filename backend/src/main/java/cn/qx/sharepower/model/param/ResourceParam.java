@@ -8,4 +8,6 @@ import lombok.Data;
  */
 @Data
 public class ResourceParam {
+    private int page;
+    private int size;
 }

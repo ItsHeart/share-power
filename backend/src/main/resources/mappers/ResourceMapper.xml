@@ -2,16 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.qx.sharepower.dao.ResourceDao">
     <sql id="Base_Column_List">
-        id ,`type`, cover, tags ,`describe`
+        id , publish_time ,`type`, title , cover, tags ,`describe`, subject , grade
     </sql>
     <sql id="ALL_Column_List">
-        id, publish_time , publisher ,`type`, grade , subject , cover, tags ,`describe`, up, down, `status`
+        id, publish_time , publisher ,`type`, title , grade , subject , cover, tags ,`describe`, up, down, `status`
     </sql>
     <select id="getList" resultType="cn.qx.sharepower.model.Resource">
+        <bind name="key_offset" value="size*page"></bind>
         select
         <include refid="Base_Column_List"/>
         from resources
-        where status = '1';
+        where status = '1'
+        limit #{key_offset},#{size}
     </select>
     <select id="getById" parameterType="java.lang.Integer" resultType="cn.qx.sharepower.model.Resource">
         select
@@ -39,6 +41,9 @@
             </if>
             <if test="type != null">
                 `type`,
+            </if>
+            <if test="title != null">
+                `title`,
             </if>
             <if test="cover != null">
                 cover,
@@ -78,6 +83,9 @@
             <if test="type != null">
                 #{type,jdbcType=VARCHAR},
             </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
             <if test="cover != null">
                 #{cover,jdbcType=VARCHAR},
             </if>
@@ -109,6 +117,9 @@
         <set>
             <if test="type != null">
                 `type` = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                `title` = #{title,jdbcType=VARCHAR},
             </if>
             <if test="cover != null">
                 cover = #{cover,jdbcType=VARCHAR},
