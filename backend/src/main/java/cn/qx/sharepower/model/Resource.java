@@ -14,8 +14,6 @@ public class Resource {
     private String publisher;
     private Date publishTime;
     private String type;
-    private int grade;
-    private String subject;
     private String title;
     /**
      * 资源地址

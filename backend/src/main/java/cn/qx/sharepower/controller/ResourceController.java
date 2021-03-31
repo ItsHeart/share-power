@@ -23,7 +23,7 @@ public class ResourceController {
 
     @ResponseBody
     @PostMapping("/getList")
-    public JsonResult getList(@RequestBody ResourceParam resourcesParam){
+    public JsonResult getList(@RequestBody ResourceParam resourcesParam) throws InterruptedException {
         return resourceService.getList(resourcesParam);
     }
 

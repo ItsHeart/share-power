@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import { ThemeProvider } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
+import Skeleton from "react-loading-skeleton";
 
 import { homeClass, cardListClass } from "@/assets/css";
 import theme from "@/assets/theme";
@@ -87,14 +88,19 @@ export default function Home() {
 					</Typography>
 					<FullSearch padding="2" iconPadding="10px" />
 				</div>
-
 				<div className={cardClasses.root}>
-					<GridList cellHeight={600} spacing={15} cols={5}>
-						{cardData.map((card) => (
-							<GridListTile key={card.id} cols={card.cols || 1}>
-								<SimpleCard data={card}></SimpleCard>
-							</GridListTile>
-						))}
+					<GridList cellHeight={500} spacing={15} cols={5}>
+						{cardData.length
+							? cardData.map((card) => (
+									<GridListTile key={card.id} cols={1}>
+										<SimpleCard data={card}></SimpleCard>
+									</GridListTile>
+							  ))
+							: [1, 2, 3, 4, 5].map((id) => (
+									<GridListTile key={id} cols={1}>
+										<Skeleton height={300} />
+									</GridListTile>
+							  ))}
 					</GridList>
 				</div>
 			</ThemeProvider>

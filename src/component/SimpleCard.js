@@ -12,11 +12,10 @@ import { useN01TextInfoContentStyles } from "@mui-treasury/styles/textInfoConten
 import { useBouncyShadowStyles } from "@mui-treasury/styles/shadow/bouncy";
 
 import { transformDate } from "@/assets/commonApi";
-import Tag from "@/component/Tag";
 
 const useStyles = makeStyles(() => ({
 	root: {
-		maxWidth: 304,
+		width: 300,
 		margin: "auto",
 		boxShadow: "none",
 		borderRadius: 0

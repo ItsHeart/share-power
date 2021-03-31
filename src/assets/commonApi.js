@@ -38,6 +38,9 @@ export const transformDate = (param) => {
 		case 11:
 			monthStr = "December ";
 			break;
+		default:
+			monthStr = "??? ";
+			break;
 	}
 	return monthStr + date.getDate() + "," + date.getFullYear();
 };

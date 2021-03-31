@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.qx.sharepower.dao.ResourceDao">
     <sql id="Base_Column_List">
-        id , publish_time ,`type`, title , cover, tags ,`describe`, subject , grade
+        id , publish_time ,`type`, title , cover, tags ,`describe`
     </sql>
     <sql id="ALL_Column_List">
-        id, publish_time , publisher ,`type`, title , grade , subject , cover, tags ,`describe`, up, down, `status`
+        id, publish_time , publisher ,`type`, title , cover, tags ,`describe`, up, down, `status`
     </sql>
     <select id="getList" resultType="cn.qx.sharepower.model.Resource">
         <bind name="key_offset" value="size*page"></bind>
@@ -48,12 +48,6 @@
             <if test="cover != null">
                 cover,
             </if>
-            <if test="grade != null">
-                grade,
-            </if>
-            <if test="subject != null">
-                subject,
-            </if>
             <if test="describe != null">
                 `describe`,
             </if>
@@ -89,12 +83,6 @@
             <if test="cover != null">
                 #{cover,jdbcType=VARCHAR},
             </if>
-            <if test="grade != null">
-                #{grade,jdbcType=INTEGER},
-            </if>
-            <if test="subject != null">
-                #{subject,jdbcType=VARCHAR},
-            </if>
             <if test="describe != null">
                 #{describe,jdbcType=VARCHAR},
             </if>
@@ -123,12 +111,6 @@
             </if>
             <if test="cover != null">
                 cover = #{cover,jdbcType=VARCHAR},
-            </if>
-            <if test="grade != null">
-                grade = #{grade,jdbcType=INTEGER},
-            </if>
-            <if test="subject != null">
-                subject = #{subject,jdbcType=VARCHAR},
             </if>
             <if test="tag != null">
                 tag = #{tag,jdbcType=VARCHAR},
