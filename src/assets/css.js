@@ -1,14 +1,13 @@
 import background from "../assets/images/background.jpg";
 import { makeStyles } from "@material-ui/core/styles";
-import theme from "./theme";
 
 const homeClass = makeStyles({
 	toolbar: {
 		display: "flex",
 		justifyContent: "space-between",
 		"& button": {
-			color: "#fff",
-		},
+			color: "#fff"
+		}
 	},
 	top: {
 		display: "flex",
@@ -21,9 +20,9 @@ const homeClass = makeStyles({
 			display: "flex",
 			justifyContent: "space-between",
 			"& button": {
-				color: "#fff",
-			},
-		},
+				color: "#fff"
+			}
+		}
 	},
 	main: {
 		backgroundImage: `URL(${background})`,
@@ -39,9 +38,9 @@ const homeClass = makeStyles({
 			display: "flex",
 			justifyContent: "center",
 			alignContent: "center",
-			marginBottom: "10px",
-		},
-	},
+			marginBottom: "10px"
+		}
+	}
 });
 
 const cardListClass = makeStyles({
@@ -53,9 +52,9 @@ const cardListClass = makeStyles({
 		marginTop: "20px",
 		"& .MuiGridList-root": {
 			width: "92vw",
-			height: "auto",
-		},
-	},
+			height: "auto"
+		}
+	}
 });
 
 const detailClass = makeStyles({
@@ -66,20 +65,23 @@ const detailClass = makeStyles({
 			display: "flex",
 			justifyContent: "space-between",
 			"& img": {
-				width: "50%",
+				width: "50%"
 			},
 			"& #description": {
 				width: "48%",
 				display: "flex",
 				flexDirection: "column",
-				justifyContent: "space-between",
-				"& button": {
-					color: "white",
-					margin: theme.spacing(1),
-				},
-			},
-		},
-	},
+				position: "relative",
+				"& #buttons": {
+					position: "absolute",
+					bottom: 0,
+					"& Button": {
+						marginRight: "10px"
+					}
+				}
+			}
+		}
+	}
 });
 
 export { homeClass, detailClass, cardListClass };
