@@ -84,4 +84,21 @@ const detailClass = makeStyles({
 	}
 });
 
-export { homeClass, detailClass, cardListClass };
+const publishClass = makeStyles({
+	root: {
+		padding: "10px",
+		"& #content": {
+			padding: "10px",
+			display: "flex",
+			"& img": {
+				width: "50%",
+				marginRight: "2%"
+			},
+			"& form": {
+				"& .MuiTextField-root,.MuiInput-formControl": { marginBottom: "15px" }
+			}
+		}
+	}
+});
+
+export { homeClass, detailClass, cardListClass, publishClass };

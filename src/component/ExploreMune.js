@@ -6,24 +6,11 @@ import ListItem from "@material-ui/core/ListItem";
 import { useHistory } from "react-router-dom";
 import ListItemText from "@material-ui/core/ListItemText";
 
-const exploreItems = [
-	{
-		text: "全部",
-		type: "0"
-	},
-	{
-		text: "PPT",
-		type: "1"
-	},
-	{
-		text: "资源",
-		type: "2"
-	}
-];
+import { itemTpye } from "@/assets/dictionaries";
 
 export default function ExploreMune() {
 	const [anchorEl, setAnchorEl] = React.useState(false);
-
+	const exploreItems = itemTpye;
 	const history = useHistory();
 
 	const handleClick = (event) => {
@@ -53,7 +40,7 @@ export default function ExploreMune() {
 					color: "#FFF"
 				}}
 				onClick={handleClick}>
-				Explore
+				探索
 			</Button>
 			<Popover
 				open={open}

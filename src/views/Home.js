@@ -64,7 +64,7 @@ export default function Home() {
 									Share Power
 								</Box>
 							</Typography>
-							<Button size="large">Login</Button>
+							<Button size="large">登录</Button>
 						</Toolbar>
 					</AppBar>
 				</HideOnScroll>
@@ -76,7 +76,7 @@ export default function Home() {
 					</Typography>
 					<div>
 						<ExploreMune></ExploreMune>
-						<Button size="large">Login</Button>
+						<Button size="large">登录</Button>
 					</div>
 				</div>
 

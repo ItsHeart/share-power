@@ -53,10 +53,10 @@ export default function NoramlAppbar(props) {
 					size="large"
 					className={classes.whiteColor}
 					onClick={() => publish()}>
-					Publish
+					发布
 				</Button>
 				<Button size="large" className={classes.whiteColor}>
-					Login
+					登录
 				</Button>
 			</Toolbar>
 		</AppBar>
