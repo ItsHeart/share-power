@@ -1,5 +1,6 @@
-import background from "../assets/images/background.jpg";
+import background from "@/assets/images/background.jpg";
 import { makeStyles } from "@material-ui/core/styles";
+import theme from "@/assets/theme";
 
 const homeClass = makeStyles({
 	toolbar: {
@@ -97,6 +98,15 @@ const publishClass = makeStyles({
 			"& form": {
 				"& .MuiTextField-root,.MuiInput-formControl": { marginBottom: "15px" }
 			}
+		}
+	},
+	chips: {
+		display: "flex",
+		flexWrap: "wrap",
+		alignItems: "center",
+		paddingTop: "15px",
+		"& > *": {
+			margin: theme.spacing(0.5)
 		}
 	}
 });

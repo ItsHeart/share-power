@@ -9,17 +9,52 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
+import Chip from "@material-ui/core/Chip";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 import theme from "../assets/theme";
 import { publishClass } from "../assets/css";
 import NoramlAppbar from "../component/NoramlAppbar";
-import { itemTpye } from "@/assets/dictionaries";
+import { PublishTpye } from "@/assets/dictionaries";
 
 export default function Publish() {
 	const classes = publishClass();
-	const exploreItems = itemTpye;
 	const { register, handleSubmit, errors } = useForm();
+	const publishTpyes = PublishTpye;
+
+	const [type, setType] = React.useState("1");
+	const [tagData, setTagData] = React.useState([]);
+
 	const onSubmit = (data) => console.log(data);
+	const deleteTag = (data) => {
+		console.log(data);
+	};
+
+	const [dialog, setDialog] = React.useState(false);
+	const [tagName, setTagName] = React.useState("");
+	const handleChangeTagName = (name) => (event) => {
+		setTagName(event.target.value);
+	};
+	const openDialog = () => {
+		setDialog(true);
+	};
+	const closeDialog = () => {
+		setDialog(false);
+	};
+	const confirmDialog = () => {
+		console.log(tagName);
+		// let temp = tagData;
+		// temp.push({
+		// 	lable: data
+		// });
+		// setTagData(temp);
+		// setDialog(false);
+	};
 
 	return (
 		<React.Fragment>
@@ -57,11 +92,38 @@ export default function Publish() {
 								/>
 								<FormControl fullWidth>
 									<InputLabel shrink>类型</InputLabel>
-									<Select labelId="demo-simple-select-label" size="small">
-										{exploreItems.map((item) => (
-											<MenuItem value={item.type}>{item.text}</MenuItem>
+									<Select
+										size="small"
+										value={type}
+										onChange={(event) => {
+											setType(event.target.value);
+										}}>
+										{publishTpyes.map((item) => (
+											<MenuItem value={item.type} key={item.type}>
+												{item.text}
+											</MenuItem>
 										))}
 									</Select>
+								</FormControl>
+								<FormControl fullWidth>
+									<InputLabel shrink>标签</InputLabel>
+									<div className={classes.chips}>
+										{tagData.map((data) => {
+											<Chip
+												label="Deletable"
+												onDelete={deleteTag}
+												variant="outlined"
+											/>;
+										})}
+
+										<Fab
+											color="primary"
+											aria-label="add"
+											size="small"
+											onClick={openDialog}>
+											<AddIcon />
+										</Fab>
+									</div>
 								</FormControl>
 								<Button type="submit" fullWidth variant="outlined">
 									发布
@@ -69,6 +131,21 @@ export default function Publish() {
 							</form>
 						</div>
 					</Paper>
+
+					<Dialog
+						open={dialog}
+						onClose={closeDialog}
+						aria-labelledby="form-dialog-title">
+						<DialogTitle id="form-dialog-title">标签名称</DialogTitle>
+						<DialogContent>
+							<TextField autoFocus margin="dense" value={tagName} fullWidth />
+						</DialogContent>
+						<DialogActions>
+							<Button onClick={confirmDialog} color="primary">
+								确定
+							</Button>
+						</DialogActions>
+					</Dialog>
 				</div>
 			</ThemeProvider>
 		</React.Fragment>

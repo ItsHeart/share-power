@@ -30,4 +30,15 @@ const itemTpye = [
 	}
 ];
 
-export { dictionaries, itemTpye };
+const PublishTpye = [
+	{
+		text: "PPT",
+		type: "1"
+	},
+	{
+		text: "资源",
+		type: "2"
+	}
+];
+
+export { dictionaries, itemTpye, PublishTpye };
