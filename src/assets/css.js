@@ -104,10 +104,19 @@ const publishClass = makeStyles({
 		display: "flex",
 		flexWrap: "wrap",
 		alignItems: "center",
-		paddingTop: "15px",
+		paddingTop: "18px",
 		"& > *": {
 			margin: theme.spacing(0.5)
 		}
+	},
+	hide: {
+		display: "none"
+	},
+	cover: {
+		display: "flex",
+		flexWrap: "wrap",
+		alignItems: "center",
+		paddingTop: "18px"
 	}
 });
 

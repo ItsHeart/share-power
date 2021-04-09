@@ -1,5 +1,4 @@
 import React from "react";
-import { useForm } from "react-hook-form";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -21,39 +20,41 @@ import theme from "../assets/theme";
 import { publishClass } from "../assets/css";
 import NoramlAppbar from "../component/NoramlAppbar";
 import { PublishTpye } from "@/assets/dictionaries";
+import { uploadFile } from "@/api/fileApi";
 
 export default function Publish() {
 	const classes = publishClass();
-	const { register, handleSubmit, errors } = useForm();
 	const publishTpyes = PublishTpye;
 
-	const [type, setType] = React.useState("1");
-	const [tagData, setTagData] = React.useState([]);
+	const [formData, setFormData] = React.useState({
+		title: "",
+		describe: "",
+		type: "1",
+		tags: ["请添加标签"]
+	});
 
-	const onSubmit = (data) => console.log(data);
-	const deleteTag = (data) => {
-		console.log(data);
+	const handleChangeForm = (name) => (event) => {
+		setFormData({ ...formData, [name]: event.target.value });
+	};
+
+	const onSubmit = (data) => console.log(formData);
+	const deleteTag = (data) => () => {
+		setFormData({
+			...formData,
+			tags: formData.tags.filter((tag) => tag !== data)
+		});
 	};
 
 	const [dialog, setDialog] = React.useState(false);
 	const [tagName, setTagName] = React.useState("");
-	const handleChangeTagName = (name) => (event) => {
+
+	const handleChangeTagName = () => (event) => {
 		setTagName(event.target.value);
 	};
-	const openDialog = () => {
-		setDialog(true);
-	};
-	const closeDialog = () => {
-		setDialog(false);
-	};
+
 	const confirmDialog = () => {
-		console.log(tagName);
-		// let temp = tagData;
-		// temp.push({
-		// 	lable: data
-		// });
-		// setTagData(temp);
-		// setDialog(false);
+		formData.tags.push(tagName);
+		setDialog(false);
 	};
 
 	return (
@@ -68,36 +69,28 @@ export default function Publish() {
 							alt="图片加载失败"
 						/>
 						<div>
-							<form onSubmit={handleSubmit(onSubmit)}>
+							<form values={formData}>
 								<TextField
-									inputRef={register({
-										required: true
-									})}
-									error={Boolean(errors.title)}
 									variant="outlined"
 									fullWidth
 									label="标题"
-									name="title"
 									size="small"
-									helperText={errors.title && "请输入标题"}
+									onChange={handleChangeForm("title")}
 								/>
 								<TextField
-									inputRef={register()}
 									variant="outlined"
 									fullWidth
 									label="描述"
-									name="describe"
 									size="small"
 									multiline
+									onChange={handleChangeForm("describe")}
 								/>
 								<FormControl fullWidth>
 									<InputLabel shrink>类型</InputLabel>
 									<Select
 										size="small"
-										value={type}
-										onChange={(event) => {
-											setType(event.target.value);
-										}}>
+										value={formData.type}
+										onChange={handleChangeForm("type")}>
 										{publishTpyes.map((item) => (
 											<MenuItem value={item.type} key={item.type}>
 												{item.text}
@@ -108,24 +101,45 @@ export default function Publish() {
 								<FormControl fullWidth>
 									<InputLabel shrink>标签</InputLabel>
 									<div className={classes.chips}>
-										{tagData.map((data) => {
-											<Chip
-												label="Deletable"
-												onDelete={deleteTag}
-												variant="outlined"
-											/>;
+										{formData.tags.map((data) => {
+											return (
+												<Chip
+													label={data}
+													key={data}
+													onDelete={deleteTag(data)}
+													variant="outlined"
+												/>
+											);
 										})}
 
 										<Fab
 											color="primary"
 											aria-label="add"
 											size="small"
-											onClick={openDialog}>
+											onClick={() => {
+												setDialog(true);
+											}}>
 											<AddIcon />
 										</Fab>
 									</div>
 								</FormControl>
-								<Button type="submit" fullWidth variant="outlined">
+								<FormControl fullWidth>
+									<InputLabel shrink>上传</InputLabel>
+									<input
+										accept="image/*"
+										className={classes.hide}
+										id="coverFile"
+										multiple
+										type="file"
+									/>
+									<label htmlFor="coverFile" className={classes.cover}>
+										<Button variant="outlined" component="span">
+											上传封面
+										</Button>
+									</label>
+								</FormControl>
+
+								<Button fullWidth variant="outlined" onClick={onSubmit}>
 									发布
 								</Button>
 							</form>
@@ -134,11 +148,18 @@ export default function Publish() {
 
 					<Dialog
 						open={dialog}
-						onClose={closeDialog}
+						onClose={() => {
+							setDialog(false);
+						}}
 						aria-labelledby="form-dialog-title">
 						<DialogTitle id="form-dialog-title">标签名称</DialogTitle>
 						<DialogContent>
-							<TextField autoFocus margin="dense" value={tagName} fullWidth />
+							<TextField
+								autoFocus
+								margin="dense"
+								fullWidth
+								onChange={handleChangeTagName()}
+							/>
 						</DialogContent>
 						<DialogActions>
 							<Button onClick={confirmDialog} color="primary">
