@@ -16,11 +16,12 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-import theme from "../assets/theme";
-import { publishClass } from "../assets/css";
-import NoramlAppbar from "../component/NoramlAppbar";
+import theme from "@/assets/theme";
+import { publishClass } from "@/assets/css";
+import NoramlAppbar from "@/component/NoramlAppbar";
 import { PublishTpye } from "@/assets/dictionaries";
 import { uploadFile } from "@/api/fileApi";
+import LinearWithValueLabel from "@/component/LinearWithValueLabel";
 
 export default function Publish() {
 	const classes = publishClass();
@@ -30,14 +31,19 @@ export default function Publish() {
 		title: "",
 		describe: "",
 		type: "1",
-		tags: ["请添加标签"]
+		tags: ["请添加标签"],
+		cover: ""
 	});
+	const [coverSrc, setCoverSrc] = React.useState(
+		"https://cdn.pixabay.com/photo/2018/08/19/01/04/thanks-3615884_1280.jpg"
+	);
 
 	const handleChangeForm = (name) => (event) => {
 		setFormData({ ...formData, [name]: event.target.value });
 	};
 
 	const onSubmit = (data) => console.log(formData);
+
 	const deleteTag = (data) => () => {
 		setFormData({
 			...formData,
@@ -57,6 +63,21 @@ export default function Publish() {
 		setDialog(false);
 	};
 
+	const [loading, setLoading] = React.useState(false);
+
+	const uploadCover = () => (e) => {
+		setLoading(true);
+		uploadFile(e.target.files[0])
+			.then((res) => {
+				setCoverSrc(process.env.REACT_APP_FILE_URL + res.data);
+				setFormData({ ...formData, cover: res.data });
+				setLoading(false);
+			})
+			.catch(function (res) {
+				console.log(res);
+			});
+	};
+
 	return (
 		<React.Fragment>
 			<ThemeProvider theme={theme}>
@@ -64,12 +85,9 @@ export default function Publish() {
 				<NoramlAppbar />
 				<div className={classes.root}>
 					<Paper id="content">
-						<img
-							src="https://cdn.pixabay.com/photo/2018/08/19/01/04/thanks-3615884_1280.jpg"
-							alt="图片加载失败"
-						/>
+						<img src={coverSrc} alt="图片加载失败" />
 						<div>
-							<form values={formData}>
+							<form>
 								<TextField
 									variant="outlined"
 									fullWidth
@@ -125,18 +143,24 @@ export default function Publish() {
 								</FormControl>
 								<FormControl fullWidth>
 									<InputLabel shrink>上传</InputLabel>
-									<input
-										accept="image/*"
-										className={classes.hide}
-										id="coverFile"
-										multiple
-										type="file"
-									/>
-									<label htmlFor="coverFile" className={classes.cover}>
-										<Button variant="outlined" component="span">
-											上传封面
-										</Button>
-									</label>
+									<div className={classes.uploadCover}>
+										{loading && <LinearWithValueLabel></LinearWithValueLabel>}
+										<input
+											accept="image/*"
+											className={classes.hide}
+											id="coverFile"
+											type="file"
+											onChange={uploadCover()}
+										/>
+										<label htmlFor="coverFile">
+											<Button
+												variant="outlined"
+												component="span"
+												className={classes.buttonClassname}>
+												上传封面
+											</Button>
+										</label>
+									</div>
 								</FormControl>
 
 								<Button fullWidth variant="outlined" onClick={onSubmit}>

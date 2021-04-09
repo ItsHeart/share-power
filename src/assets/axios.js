@@ -5,7 +5,10 @@ const axios = Axios.create();
 axios.defaults.headers["Content-Type"] = "application/json;charset=UTF-8";
 
 axios.interceptors.request.use((config) => {
-	if (config.method === "post") {
+	if (
+		config.method === "post" &&
+		config.headers["Content-Type"] !== "multipart/form-data"
+	) {
 		config.data = JSON.stringify(config.data);
 	}
 	return config;

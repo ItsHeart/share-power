@@ -112,7 +112,7 @@ const publishClass = makeStyles({
 	hide: {
 		display: "none"
 	},
-	cover: {
+	uploadCover: {
 		display: "flex",
 		flexWrap: "wrap",
 		alignItems: "center",
