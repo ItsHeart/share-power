@@ -116,7 +116,14 @@ const publishClass = makeStyles({
 		display: "flex",
 		flexWrap: "wrap",
 		alignItems: "center",
-		paddingTop: "18px"
+		paddingTop: "18px",
+		"& > *": {
+			margin: theme.spacing(0.5)
+		}
+	},
+	backdrop: {
+		zIndex: 999,
+		color: "#fff"
 	}
 });
 

@@ -2,6 +2,7 @@ package cn.qx.sharepower.controller;
 
 
 import cn.qx.sharepower.model.JsonResult;
+import cn.qx.sharepower.model.Resource;
 import cn.qx.sharepower.model.param.ResourceParam;
 import cn.qx.sharepower.service.ResourceService;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class ResourceController {
 
     @ResponseBody
     @PostMapping("/getList")
-    public JsonResult getList(@RequestBody ResourceParam resourcesParam) throws InterruptedException {
+    public JsonResult getList(@RequestBody ResourceParam resourcesParam){
         return resourceService.getList(resourcesParam);
     }
 
@@ -31,5 +32,11 @@ public class ResourceController {
     @GetMapping("/get")
     public JsonResult get(int id){
         return resourceService.get(id);
+    }
+
+    @ResponseBody
+    @PostMapping("/add")
+    public JsonResult add(@RequestBody Resource resources) {
+        return resourceService.add(resources);
     }
 }

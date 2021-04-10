@@ -12,3 +12,10 @@ export const get = (id) => {
 		process.env.REACT_APP_BACKEND_URL + "resources/get?id=" + id
 	);
 };
+
+export const add = (param) => {
+	if (param.tags) {
+		param.tags = JSON.stringify(param.tags);
+	}
+	return axios.post(process.env.REACT_APP_BACKEND_URL + "resources/add", param);
+};

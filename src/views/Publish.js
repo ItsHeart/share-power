@@ -15,12 +15,16 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import DoneIcon from "@material-ui/icons/Done";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import theme from "@/assets/theme";
 import { publishClass } from "@/assets/css";
 import NoramlAppbar from "@/component/NoramlAppbar";
 import { PublishTpye } from "@/assets/dictionaries";
-import { uploadFile } from "@/api/fileApi";
+import { uploadImage, uploadFile } from "@/api/fileApi";
+import { add } from "@/api/resourceApi";
 import LinearWithValueLabel from "@/component/LinearWithValueLabel";
 
 export default function Publish() {
@@ -42,7 +46,17 @@ export default function Publish() {
 		setFormData({ ...formData, [name]: event.target.value });
 	};
 
-	const onSubmit = (data) => console.log(formData);
+	const onSubmit = () => {
+		setSubmitLoading(true);
+		add(Object.assign({}, formData))
+			.then((res) => {
+				console.log(formData.tags);
+				setSubmitLoading(false);
+			})
+			.catch(function (res) {
+				console.log(res);
+			});
+	};
 
 	const deleteTag = (data) => () => {
 		setFormData({
@@ -52,6 +66,7 @@ export default function Publish() {
 	};
 
 	const [dialog, setDialog] = React.useState(false);
+	const [submitLoading, setSubmitLoading] = React.useState(false);
 	const [tagName, setTagName] = React.useState("");
 
 	const handleChangeTagName = () => (event) => {
@@ -63,15 +78,27 @@ export default function Publish() {
 		setDialog(false);
 	};
 
-	const [loading, setLoading] = React.useState(false);
+	const [uploadLoading, setUploadLoading] = React.useState(false);
 
 	const uploadCover = () => (e) => {
-		setLoading(true);
+		setUploadLoading(true);
+		uploadImage(e.target.files[0])
+			.then((res) => {
+				setCoverSrc(process.env.REACT_APP_IMAGE_URL + res.data);
+				setFormData({ ...formData, cover: res.data });
+				setUploadLoading(false);
+			})
+			.catch(function (res) {
+				console.log(res);
+			});
+	};
+
+	const uploadResource = () => (e) => {
+		setUploadLoading(true);
 		uploadFile(e.target.files[0])
 			.then((res) => {
-				setCoverSrc(process.env.REACT_APP_FILE_URL + res.data);
-				setFormData({ ...formData, cover: res.data });
-				setLoading(false);
+				setFormData({ ...formData, url: res.data });
+				setUploadLoading(false);
 			})
 			.catch(function (res) {
 				console.log(res);
@@ -144,7 +171,9 @@ export default function Publish() {
 								<FormControl fullWidth>
 									<InputLabel shrink>上传</InputLabel>
 									<div className={classes.uploadCover}>
-										{loading && <LinearWithValueLabel></LinearWithValueLabel>}
+										{uploadLoading && (
+											<LinearWithValueLabel></LinearWithValueLabel>
+										)}
 										<input
 											accept="image/*"
 											className={classes.hide}
@@ -156,8 +185,24 @@ export default function Publish() {
 											<Button
 												variant="outlined"
 												component="span"
-												className={classes.buttonClassname}>
+												className={classes.buttonClassname}
+												startIcon={formData.cover && <DoneIcon />}>
 												上传封面
+											</Button>
+										</label>
+										<input
+											className={classes.hide}
+											id="resourceFile"
+											type="file"
+											onChange={uploadResource()}
+										/>
+										<label htmlFor="resourceFile">
+											<Button
+												variant="outlined"
+												component="span"
+												className={classes.buttonClassname}
+												startIcon={formData.url && <DoneIcon />}>
+												上传资源
 											</Button>
 										</label>
 									</div>
@@ -191,6 +236,10 @@ export default function Publish() {
 							</Button>
 						</DialogActions>
 					</Dialog>
+
+					<Backdrop className={classes.backdrop} open={submitLoading}>
+						<CircularProgress color="inherit" />
+					</Backdrop>
 				</div>
 			</ThemeProvider>
 		</React.Fragment>

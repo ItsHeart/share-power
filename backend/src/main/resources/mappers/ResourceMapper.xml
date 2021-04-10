@@ -23,16 +23,13 @@
         and status = '1'
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    update resources
-    set status = '0'
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-    <insert id="insert" parameterType="cn.qx.sharepower.model.Resource">
+      update resources
+      set status = '0'
+      where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="cn.qx.sharepower.model.Resource" useGeneratedKeys="true" keyProperty="id">
         insert into resources
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
             <if test="publishTime != null">
                 publish_time,
             </if>
@@ -51,8 +48,8 @@
             <if test="describe != null">
                 `describe`,
             </if>
-            <if test="tag != null">
-                tag,
+            <if test="tags != null">
+                tags,
             </if>
             <if test="up != null">
                 up,
@@ -65,9 +62,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
             <if test="publishTime != null">
                 #{publishTime},
             </if>
@@ -112,8 +106,8 @@
             <if test="cover != null">
                 cover = #{cover,jdbcType=VARCHAR},
             </if>
-            <if test="tag != null">
-                tag = #{tag,jdbcType=VARCHAR},
+            <if test="tags != null">
+                tags = #{tags,jdbcType=VARCHAR},
             </if>
             <if test="describe != null">
                 `describe` = #{describe,jdbcType=VARCHAR},

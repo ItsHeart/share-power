@@ -38,4 +38,12 @@ public class ResourceServiceImpl implements ResourceService {
         jsonResult.put("data",resource);
         return jsonResult;
     }
+
+    @Override
+    public JsonResult add(Resource resource) {
+        resourceDao.insert(resource);
+        JsonResult jsonResult = JsonResult.ok();
+        jsonResult.put("data",resource.getId());
+        return jsonResult;
+    }
 }

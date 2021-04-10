@@ -2,6 +2,7 @@ package cn.qx.sharepower.service;
 
 
 import cn.qx.sharepower.model.JsonResult;
+import cn.qx.sharepower.model.Resource;
 import cn.qx.sharepower.model.param.ResourceParam;
 
 /**
@@ -11,4 +12,5 @@ import cn.qx.sharepower.model.param.ResourceParam;
 public interface ResourceService {
     JsonResult getList(ResourceParam resourcesParam);
     JsonResult get(int id);
+    JsonResult add(Resource resource);
 }
