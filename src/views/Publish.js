@@ -40,19 +40,25 @@ export default function Publish() {
 		tags: ["请添加标签"],
 		cover: ""
 	});
-	const [coverSrc, setCoverSrc] = React.useState(
-		"https://cdn.pixabay.com/photo/2018/08/19/01/04/thanks-3615884_1280.jpg"
-	);
+
+	const [pageData, setPageData] = React.useState({
+		coverSrc:
+			"https://cdn.pixabay.com/photo/2018/08/19/01/04/thanks-3615884_1280.jpg",
+		uploadLoading: false,
+		submitLoading: false,
+		tagName: "",
+		dialog: false
+	});
 
 	const handleChangeForm = (name) => (event) => {
 		setFormData({ ...formData, [name]: event.target.value });
 	};
 
 	const onSubmit = () => {
-		setSubmitLoading(true);
+		setPageData({ ...pageData, submitLoading: true });
 		add(Object.assign({}, formData))
 			.then((res) => {
-				setSubmitLoading(false);
+				setPageData({ ...pageData, submitLoading: false });
 				history.push({
 					pathname: "/Detail/" + res.data,
 					params: {}
@@ -70,28 +76,29 @@ export default function Publish() {
 		});
 	};
 
-	const [dialog, setDialog] = React.useState(false);
-	const [submitLoading, setSubmitLoading] = React.useState(false);
-	const [tagName, setTagName] = React.useState("");
-
 	const handleChangeTagName = () => (event) => {
-		setTagName(event.target.value);
+		setPageData({ ...pageData, tagName: event.target.value });
 	};
 
 	const confirmDialog = () => {
-		formData.tags.push(tagName);
-		setDialog(false);
+		setFormData((o) => {
+			let n = Object.assign({}, o);
+			n.tags.push(pageData.tagName);
+			return n;
+		});
+		setPageData({ ...pageData, dialog: false });
 	};
 
-	const [uploadLoading, setUploadLoading] = React.useState(false);
-
 	const uploadCover = () => (e) => {
-		setUploadLoading(true);
+		setPageData({ ...pageData, uploadLoading: true });
 		uploadImage(e.target.files[0])
 			.then((res) => {
-				setCoverSrc(process.env.REACT_APP_IMAGE_URL + res.data);
 				setFormData({ ...formData, cover: res.data });
-				setUploadLoading(false);
+				setPageData({
+					...pageData,
+					uploadLoading: false,
+					coverSrc: process.env.REACT_APP_IMAGE_URL + res.data
+				});
 			})
 			.catch(function (res) {
 				console.log(res);
@@ -99,11 +106,11 @@ export default function Publish() {
 	};
 
 	const uploadResource = () => (e) => {
-		setUploadLoading(true);
+		setPageData({ ...pageData, uploadLoading: true });
 		uploadFile(e.target.files[0])
 			.then((res) => {
 				setFormData({ ...formData, url: res.data });
-				setUploadLoading(false);
+				setPageData({ ...pageData, uploadLoading: false });
 			})
 			.catch(function (res) {
 				console.log(res);
@@ -117,7 +124,7 @@ export default function Publish() {
 				<NoramlAppbar />
 				<div className={classes.root}>
 					<Paper id="content">
-						<img src={coverSrc} alt="图片加载失败" />
+						<img src={pageData.coverSrc} alt="图片加载失败" />
 						<div>
 							<form>
 								<TextField
@@ -167,7 +174,7 @@ export default function Publish() {
 											aria-label="add"
 											size="small"
 											onClick={() => {
-												setDialog(true);
+												setPageData({ ...pageData, dialog: true });
 											}}>
 											<AddIcon />
 										</Fab>
@@ -176,7 +183,7 @@ export default function Publish() {
 								<FormControl fullWidth>
 									<InputLabel shrink>上传</InputLabel>
 									<div className={classes.uploadCover}>
-										{uploadLoading && (
+										{pageData.uploadLoading && (
 											<LinearWithValueLabel></LinearWithValueLabel>
 										)}
 										<input
@@ -221,9 +228,9 @@ export default function Publish() {
 					</Paper>
 
 					<Dialog
-						open={dialog}
+						open={pageData.dialog}
 						onClose={() => {
-							setDialog(false);
+							setPageData({ ...pageData, dialog: false });
 						}}
 						aria-labelledby="form-dialog-title">
 						<DialogTitle id="form-dialog-title">标签名称</DialogTitle>
@@ -242,7 +249,7 @@ export default function Publish() {
 						</DialogActions>
 					</Dialog>
 
-					<Backdrop className={classes.backdrop} open={submitLoading}>
+					<Backdrop className={classes.backdrop} open={pageData.submitLoading}>
 						<CircularProgress color="inherit" />
 					</Backdrop>
 				</div>

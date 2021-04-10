@@ -122,7 +122,7 @@ const publishClass = makeStyles({
 		}
 	},
 	backdrop: {
-		zIndex: 999,
+		zIndex: 9999,
 		color: "#fff"
 	}
 });
