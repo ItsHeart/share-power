@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -30,6 +31,7 @@ import LinearWithValueLabel from "@/component/LinearWithValueLabel";
 export default function Publish() {
 	const classes = publishClass();
 	const publishTpyes = PublishTpye;
+	const history = useHistory();
 
 	const [formData, setFormData] = React.useState({
 		title: "",
@@ -50,8 +52,11 @@ export default function Publish() {
 		setSubmitLoading(true);
 		add(Object.assign({}, formData))
 			.then((res) => {
-				console.log(formData.tags);
 				setSubmitLoading(false);
+				history.push({
+					pathname: "/Detail/" + res.data,
+					params: {}
+				});
 			})
 			.catch(function (res) {
 				console.log(res);

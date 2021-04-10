@@ -45,6 +45,10 @@ export default function Detail() {
 					data.describe.length > 300
 						? data.describe.slice(0, 300) + "..."
 						: data.describe;
+				data.cover =
+					data.cover.indexOf("http") === -1
+						? process.env.REACT_APP_IMAGE_URL + data.cover
+						: data.cover;
 				setResourceData(data);
 			})
 			.catch(function (res) {});
