@@ -64,7 +64,10 @@ export default function Home() {
 									Share Power
 								</Box>
 							</Typography>
-							<Button size="large">登录</Button>
+							<div>
+								<ExploreMune></ExploreMune>
+								<Button size="large">登录</Button>
+							</div>
 						</Toolbar>
 					</AppBar>
 				</HideOnScroll>
@@ -89,7 +92,7 @@ export default function Home() {
 					<FullSearch padding="2" iconPadding="10px" />
 				</div>
 				<div className={cardClasses.root}>
-					<GridList cellHeight={500} spacing={15} cols={5}>
+					<GridList cellHeight={350} spacing={15} cols={5}>
 						{cardData.length
 							? cardData.map((card) => (
 									<GridListTile key={card.id} cols={1}>

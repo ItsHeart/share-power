@@ -8,6 +8,13 @@ const homeClass = makeStyles({
 		justifyContent: "space-between",
 		"& button": {
 			color: "#fff"
+		},
+		"& div": {
+			display: "flex",
+			justifyContent: "space-between",
+			"& button": {
+				color: "#fff"
+			}
 		}
 	},
 	top: {

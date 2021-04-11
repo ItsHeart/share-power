@@ -10,6 +10,8 @@ import TextInfoContent from "@mui-treasury/components/content/textInfo";
 import { useWideCardMediaStyles } from "@mui-treasury/styles/cardMedia/wide";
 import { useN01TextInfoContentStyles } from "@mui-treasury/styles/textInfoContent/n01";
 import { useBouncyShadowStyles } from "@mui-treasury/styles/shadow/bouncy";
+import Divider from "@material-ui/core/Divider";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 import { transformDate } from "@/assets/commonApi";
 
@@ -24,8 +26,15 @@ const useStyles = makeStyles(() => ({
 		padding: 24
 	},
 	more: {
-		marginTop: 24,
 		textTransform: "initial"
+	},
+	up: {
+		marginTop: 8,
+		display: "flex",
+		alignItems: "center",
+		"& *": {
+			marginRight: 8
+		}
 	}
 }));
 
@@ -56,16 +65,20 @@ export const SimpleCard = React.memo(function NewsCard(props) {
 					classes={textCardContentStyles}
 					overline={transformDate(data.publishTime)}
 					heading={data.title}
-					body={data.describe}
 				/>
-				<Button
-					color={"primary"}
-					fullWidth
-					className={styles.more}
-					onClick={() => detail()}>
-					了解更多
-					<ChevronRightRounded />
-				</Button>
+				<Divider />
+				<div className={styles.up}>
+					<FavoriteIcon color="secondary" fontSize="small" />
+					<span>{data.up}</span>
+					<Button
+						color={"primary"}
+						fullWidth
+						className={styles.more}
+						onClick={() => detail()}>
+						了解更多
+						<ChevronRightRounded />
+					</Button>
+				</div>
 			</CardContent>
 		</Card>
 	);

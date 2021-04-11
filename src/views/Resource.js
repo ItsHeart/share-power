@@ -34,7 +34,7 @@ export default function Resource() {
 				<NoramlAppbar />
 				<SelectControl />
 				<div className={classes.root}>
-					<GridList cellHeight={400} spacing={10} cols={5}>
+					<GridList cellHeight={350} spacing={10} cols={5}>
 						{cardData.map((card) => (
 							<GridListTile key={card.id} cols={card.cols || 1}>
 								<SimpleCard data={card}></SimpleCard>
