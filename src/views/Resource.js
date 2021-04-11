@@ -15,6 +15,7 @@ import { getList } from "@/api/resourceApi";
 export default function Resource() {
 	const classes = cardListClass();
 	const [cardData, setCardData] = useState([]);
+	const [page, setPage] = useState(1);
 
 	useEffect(() => {
 		getList({
@@ -26,6 +27,22 @@ export default function Resource() {
 			})
 			.catch(function (res) {});
 	}, []);
+
+	const loadMore = () => {
+		getList({
+			page: page,
+			size: 5
+		})
+			.then((res) => {
+				setCardData((o) => {
+					let n = o;
+					n.concat(res.data);
+					return n;
+				});
+				setPage(page + 1);
+			})
+			.catch(function (res) {});
+	};
 
 	return (
 		<React.Fragment>
@@ -41,7 +58,10 @@ export default function Resource() {
 							</GridListTile>
 						))}
 					</GridList>
-					<Button variant="outlined" className={classes.more}>
+					<Button
+						variant="outlined"
+						className={classes.more}
+						onClick={loadMore}>
 						more
 					</Button>
 				</div>

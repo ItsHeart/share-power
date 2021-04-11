@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.qx.sharepower.dao.ResourceDao">
     <sql id="Base_Column_List">
-        id , publish_time ,`type`, title , cover, tags ,`describe`
+        id , publish_time ,`type`, title , cover, tags ,`describe`, up
     </sql>
     <sql id="ALL_Column_List">
         id, publish_time , publisher ,`type`, title , cover, tags ,`describe`, up, down, `status`
