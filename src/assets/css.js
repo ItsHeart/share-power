@@ -55,6 +55,10 @@ const cardListClass = makeStyles({
 			width: "92vw",
 			height: "auto"
 		}
+	},
+	more: {
+		width: "92.5%",
+		margin: "10px 0"
 	}
 });
 

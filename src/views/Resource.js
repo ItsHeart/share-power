@@ -3,6 +3,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
+import Button from "@material-ui/core/Button";
 
 import theme from "../assets/theme";
 import { cardListClass } from "../assets/css";
@@ -18,7 +19,7 @@ export default function Resource() {
 	useEffect(() => {
 		getList({
 			page: 0,
-			size: 3
+			size: 10
 		})
 			.then((res) => {
 				setCardData(res.data);
@@ -33,13 +34,16 @@ export default function Resource() {
 				<NoramlAppbar />
 				<SelectControl />
 				<div className={classes.root}>
-					<GridList cellHeight={600} spacing={10} cols={3}>
+					<GridList cellHeight={400} spacing={10} cols={5}>
 						{cardData.map((card) => (
 							<GridListTile key={card.id} cols={card.cols || 1}>
 								<SimpleCard data={card}></SimpleCard>
 							</GridListTile>
 						))}
 					</GridList>
+					<Button variant="outlined" className={classes.more}>
+						more
+					</Button>
 				</div>
 			</ThemeProvider>
 		</React.Fragment>

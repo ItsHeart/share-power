@@ -45,6 +45,9 @@ export const SimpleCard = React.memo(function NewsCard(props) {
 	if (data.describe.length > 45) {
 		data.describe = data.describe.substr(0, 45) + "...";
 	}
+	if (data.cover.indexOf("http") === -1) {
+		data.cover = process.env.REACT_APP_IMAGE_URL + data.cover;
+	}
 	return (
 		<Card className={(styles.root, shadowStyles.root)}>
 			<CardMedia classes={mediaStyles} image={data.cover} />
