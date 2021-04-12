@@ -17,7 +17,7 @@ export default function Resource() {
 	const classes = cardListClass();
 	const [cardData, setCardData] = useState([]);
 	const [skeleton, setSkeleton] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState(2);
 
 	useEffect(() => {
 		getList({
@@ -40,9 +40,9 @@ export default function Resource() {
 			.then((res) => {
 				setCardData((o) => {
 					let n = o;
-					n.concat(res.data);
-					return n;
+					return n.concat(res.data);
 				});
+				console.log(cardData);
 				setSkeleton([]);
 				setPage(page + 1);
 			})

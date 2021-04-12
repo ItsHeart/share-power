@@ -5,7 +5,7 @@
         id , publish_time ,`type`, title , cover, tags ,`describe`, up
     </sql>
     <sql id="ALL_Column_List">
-        id, publish_time , publisher ,`type`, title , cover, tags ,`describe`, up, down, `status`
+        id, publish_time , publisher ,`type`, title , cover, url ,tags ,`describe`, up, down, `status`
     </sql>
     <select id="getList" resultType="cn.qx.sharepower.model.Resource">
         <bind name="key_offset" value="size*page"></bind>
@@ -45,6 +45,9 @@
             <if test="cover != null">
                 cover,
             </if>
+            <if test="url != null">
+                url,
+            </if>
             <if test="describe != null">
                 `describe`,
             </if>
@@ -77,6 +80,9 @@
             <if test="cover != null">
                 #{cover,jdbcType=VARCHAR},
             </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
             <if test="describe != null">
                 #{describe,jdbcType=VARCHAR},
             </if>
@@ -105,6 +111,9 @@
             </if>
             <if test="cover != null">
                 cover = #{cover,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
             </if>
             <if test="tags != null">
                 tags = #{tags,jdbcType=VARCHAR},

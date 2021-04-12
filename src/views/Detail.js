@@ -79,7 +79,15 @@ export default function Detail() {
 								body={resourceData.describeCopy}
 							/>
 							<div id="buttons">
-								<Button variant="outlined">下载</Button>
+								<Button
+									variant="outlined"
+									onClick={() => {
+										window.open(
+											process.env.REACT_APP_FILE_URL + resourceData.url
+										);
+									}}>
+									下载
+								</Button>
 								<Button variant="outlined">复制描述</Button>
 								<Button variant="outlined">称赞</Button>
 								<Button variant="outlined">举报</Button>
