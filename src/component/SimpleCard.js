@@ -26,6 +26,7 @@ const useStyles = makeStyles(() => ({
 		padding: 24
 	},
 	more: {
+		paddingLeft: 28,
 		textTransform: "initial"
 	},
 	up: {
@@ -33,7 +34,7 @@ const useStyles = makeStyles(() => ({
 		display: "flex",
 		alignItems: "center",
 		"& *": {
-			marginRight: 8
+			marginRight: 10
 		}
 	}
 }));

@@ -24,7 +24,8 @@ public class ResourceController {
 
     @ResponseBody
     @PostMapping("/getList")
-    public JsonResult getList(@RequestBody ResourceParam resourcesParam){
+    public JsonResult getList(@RequestBody ResourceParam resourcesParam) throws InterruptedException {
+        Thread.sleep(3000);
         return resourceService.getList(resourcesParam);
     }
 
