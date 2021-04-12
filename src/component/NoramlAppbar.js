@@ -1,22 +1,16 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import FullSearch from "../component/FullSearch";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 const useStyles = makeStyles((theme) => ({
 	whiteColor: {
 		color: "#fff"
-	},
-	home: {
-		color: "#fff",
-		userSelect: "none",
-		cursor: "pointer"
 	}
 }));
 
@@ -24,26 +18,19 @@ export default function NoramlAppbar(props) {
 	const classes = useStyles();
 
 	const history = useHistory();
-	const home = () => {
-		history.push({
-			pathname: "/"
-		});
-	};
-
-	const publish = () => {
-		history.push({
-			pathname: "/Publish"
-		});
-	};
 
 	return (
 		<AppBar position="static">
 			<Toolbar>
 				<Grid container spacing={3}>
-					<Grid item xs={2} onClick={() => home()}>
-						<Typography variant="h5" className={classes.home}>
-							<Box fontWeight="fontWeightLight">Share Power</Box>
-						</Typography>
+					<Grid item xs={2}>
+						<Button
+							size="large"
+							className={classes.whiteColor}
+							startIcon={<ArrowBackIosIcon />}
+							onClick={() => history.goBack()}>
+							返回
+						</Button>
 					</Grid>
 					<Grid item xs={3}>
 						<FullSearch padding="0" iconPadding="0 5px" />
@@ -52,7 +39,11 @@ export default function NoramlAppbar(props) {
 				<Button
 					size="large"
 					className={classes.whiteColor}
-					onClick={() => publish()}>
+					onClick={() =>
+						history.push({
+							pathname: "/Publish"
+						})
+					}>
 					发布
 				</Button>
 				<Button size="large" className={classes.whiteColor}>

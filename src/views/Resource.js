@@ -56,7 +56,7 @@ export default function Resource() {
 				<NoramlAppbar />
 				<SelectControl />
 				<div className={classes.root}>
-					<GridList cellHeight={350} spacing={10} cols={5}>
+					<GridList cellHeight={320} spacing={10} cols={5}>
 						{cardData.map((card) => (
 							<GridListTile key={card.id} cols={1}>
 								<SimpleCard data={card}></SimpleCard>
@@ -64,7 +64,7 @@ export default function Resource() {
 						))}
 						{skeleton.map((id) => (
 							<GridListTile key={id} cols={1}>
-								<Skeleton height={300} />
+								<Skeleton height={320} />
 							</GridListTile>
 						))}
 					</GridList>

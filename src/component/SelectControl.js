@@ -20,7 +20,8 @@ export default function SelectControl(props) {
 	const classes = useStyles();
 	const [condition, setCondition] = React.useState({
 		type: 0,
-		sort: 0
+		sort: 0,
+		order: 0
 	});
 
 	return (
@@ -53,6 +54,22 @@ export default function SelectControl(props) {
 					<MenuItem value={1}>发布时间</MenuItem>
 					<MenuItem value={2}>点赞数量</MenuItem>
 					<MenuItem value={3}>相关程度</MenuItem>
+				</Select>
+			</FormControl>
+
+			<FormControl className={classes.formControl}>
+				<InputLabel id="demo-simple-select-autowidth-label">
+					排序方式
+				</InputLabel>
+				<Select
+					value={condition.sort}
+					onChange={(event) => {
+						setCondition({ ...condition, sort: event.target.value });
+					}}
+					autoWidth>
+					<MenuItem value={0}>默认</MenuItem>
+					<MenuItem value={1}>降序</MenuItem>
+					<MenuItem value={2}>升序</MenuItem>
 				</Select>
 			</FormControl>
 		</Paper>

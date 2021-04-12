@@ -92,7 +92,7 @@ export default function Home() {
 					<FullSearch padding="2" iconPadding="10px" />
 				</div>
 				<div className={cardClasses.root}>
-					<GridList cellHeight={350} spacing={15} cols={5}>
+					<GridList cellHeight={320} spacing={15} cols={5}>
 						{cardData.length
 							? cardData.map((card) => (
 									<GridListTile key={card.id} cols={1}>

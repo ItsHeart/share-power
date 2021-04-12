@@ -17,13 +17,15 @@ import { transformDate } from "@/assets/commonApi";
 
 const useStyles = makeStyles(() => ({
 	root: {
-		width: 300,
 		margin: "auto",
 		boxShadow: "none",
 		borderRadius: 0
 	},
 	content: {
-		padding: 24
+		padding: 24,
+		"& .MuiTypography-root": {
+			marginBottom: 6
+		}
 	},
 	more: {
 		paddingLeft: 28,
