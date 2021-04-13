@@ -22,25 +22,24 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SelectControl(props) {
 	const classes = useStyles();
-	const [condition, setCondition] = React.useState({
-		type: 0,
-		sort: 0,
-		order: 0
-	});
+
+	const search = () => {
+		props.reload();
+	};
 
 	return (
 		<Paper className={classes.root}>
 			<FormControl className={classes.formControl}>
 				<InputLabel id="demo-simple-select-autowidth-label">种类</InputLabel>
 				<Select
-					value={condition.type}
+					value={props.data.type}
 					onChange={(event) => {
-						setCondition({ ...condition, type: event.target.value });
+						props.setData("type", event.target.value);
 					}}
 					autoWidth>
-					<MenuItem value={0}>全部</MenuItem>
-					<MenuItem value={1}>PPT</MenuItem>
-					<MenuItem value={2}>资源</MenuItem>
+					<MenuItem value={"0"}>全部</MenuItem>
+					<MenuItem value={"1"}>PPT</MenuItem>
+					<MenuItem value={"2"}>资源</MenuItem>
 				</Select>
 			</FormControl>
 
@@ -49,15 +48,13 @@ export default function SelectControl(props) {
 					排列方式
 				</InputLabel>
 				<Select
-					value={condition.sort}
+					value={props.data.sort}
 					onChange={(event) => {
-						setCondition({ ...condition, sort: event.target.value });
+						props.setData("sort", event.target.value);
 					}}
 					autoWidth>
-					<MenuItem value={0}>默认排序</MenuItem>
-					<MenuItem value={1}>发布时间</MenuItem>
-					<MenuItem value={2}>点赞数量</MenuItem>
-					<MenuItem value={3}>相关程度</MenuItem>
+					<MenuItem value={"0"}>发布时间</MenuItem>
+					<MenuItem value={"1"}>点赞数量</MenuItem>
 				</Select>
 			</FormControl>
 
@@ -66,18 +63,19 @@ export default function SelectControl(props) {
 					排序方式
 				</InputLabel>
 				<Select
-					value={condition.order}
+					value={props.data.order}
 					onChange={(event) => {
-						setCondition({ ...condition, order: event.target.value });
+						props.setData("order", event.target.value);
 					}}
 					autoWidth>
-					<MenuItem value={0}>默认</MenuItem>
-					<MenuItem value={1}>降序</MenuItem>
-					<MenuItem value={2}>升序</MenuItem>
+					<MenuItem value={"0"}>降序</MenuItem>
+					<MenuItem value={"1"}>升序</MenuItem>
 				</Select>
 			</FormControl>
 			<FormControl className={classes.search}>
-				<Button variant="outlined">重新搜索</Button>
+				<Button variant="outlined" onClick={search}>
+					重新搜索
+				</Button>
 			</FormControl>
 		</Paper>
 	);

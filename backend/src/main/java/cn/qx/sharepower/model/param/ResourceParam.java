@@ -10,4 +10,7 @@ import lombok.Data;
 public class ResourceParam {
     private int page;
     private int size;
+    private String type;
+    private String sort;
+    private String order;
 }

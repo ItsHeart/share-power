@@ -19,6 +19,12 @@ export default function Resource() {
 	const [skeleton, setSkeleton] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 	const [now, setNow] = useState(1);
 	const [page, setPage] = useState(1);
+	const [param, setParam] = useState({
+		size: 10,
+		sort: "0",
+		order: "0",
+		type: "0"
+	});
 
 	useEffect(() => {
 		getList({
@@ -39,13 +45,32 @@ export default function Resource() {
 		setSkeleton([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 		getList({
 			page: value - 1,
-			size: 10
+			size: param.size
 		})
 			.then((res) => {
 				setCardData(res.data);
+				setPage(Math.ceil(res.total / 10));
 				setSkeleton([]);
 			})
 			.catch(function (res) {});
+	};
+
+	const sortChange = () => {
+		getList(param)
+			.then((res) => {
+				setCardData(res.data);
+				setPage(Math.ceil(res.total / 10));
+				setSkeleton([]);
+			})
+			.catch(function (res) {});
+	};
+
+	const _setParam = (key, value) => {
+		setParam((o) => {
+			let n = Object.assign({}, o);
+			n[key] = value;
+			return n;
+		});
 	};
 
 	return (
@@ -53,7 +78,7 @@ export default function Resource() {
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<NoramlAppbar />
-				<SelectControl />
+				<SelectControl reload={sortChange} data={param} setData={_setParam} />
 				<div className={classes.root}>
 					<GridList cellHeight={320} spacing={10} cols={5}>
 						{cardData.map((card) => (

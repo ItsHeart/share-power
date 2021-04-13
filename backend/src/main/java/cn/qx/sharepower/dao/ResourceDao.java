@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface ResourceDao {
     List<Resource> getList(ResourceParam resourceParam);
-    int getTotalCount();
+    int getTotalCount(ResourceParam resourceParam);
     Resource getById(int id);
     void deleteByPrimaryKey(int id);
     void insert(Resource resource);

@@ -28,7 +28,7 @@ public class ResourceServiceImpl implements ResourceService {
         List<Resource> resourceList = resourceDao.getList(resourcesParam);
         JsonResult jsonResult = JsonResult.ok();
         jsonResult.put("data",resourceList);
-        jsonResult.put("total",resourceDao.getTotalCount());
+        jsonResult.put("total",resourceDao.getTotalCount(resourcesParam));
         return jsonResult;
     }
 

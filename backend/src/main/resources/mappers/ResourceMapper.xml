@@ -7,19 +7,34 @@
     <sql id="ALL_Column_List">
         id, publish_time , publisher ,`type`, title , cover, url ,tags ,`describe`, up, down, `status`
     </sql>
-    <select id="getList" resultType="cn.qx.sharepower.model.Resource">
+    <select id="getList" resultType="cn.qx.sharepower.model.Resource" parameterType="cn.qx.sharepower.model.param.ResourceParam">
         <bind name="key_offset" value="size*page"></bind>
         select
         <include refid="Base_Column_List"/>
         from resources
         where status = '1'
+        <if test="type == 1 or type == 2 ">
+           and type = #{type}
+        </if>
+        <if test="sort == 0">
+            order by publish_time
+        </if>
+        <if test="sort == 1">
+            order by up
+        </if>
+        <if test="order == 0">
+            desc
+        </if>
         limit #{key_offset},#{size}
     </select>
-    <select id="getTotalCount" resultType="int">
+    <select id="getTotalCount" resultType="int" parameterType="cn.qx.sharepower.model.param.ResourceParam">
         select
         count(0)
         from resources
         where status = '1'
+        <if test="type == 1 or type == 2 ">
+            and type = #{type}
+        </if>
     </select>
     <select id="getById" parameterType="java.lang.Integer" resultType="cn.qx.sharepower.model.Resource">
         select
