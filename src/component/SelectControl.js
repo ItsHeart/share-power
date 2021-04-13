@@ -5,6 +5,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
@@ -13,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 	root: {
 		padding: "0 4vw"
+	},
+	search: {
+		margin: theme.spacing(1.8)
 	}
 }));
 
@@ -62,15 +66,18 @@ export default function SelectControl(props) {
 					排序方式
 				</InputLabel>
 				<Select
-					value={condition.sort}
+					value={condition.order}
 					onChange={(event) => {
-						setCondition({ ...condition, sort: event.target.value });
+						setCondition({ ...condition, order: event.target.value });
 					}}
 					autoWidth>
 					<MenuItem value={0}>默认</MenuItem>
 					<MenuItem value={1}>降序</MenuItem>
 					<MenuItem value={2}>升序</MenuItem>
 				</Select>
+			</FormControl>
+			<FormControl className={classes.search}>
+				<Button variant="outlined">重新搜索</Button>
 			</FormControl>
 		</Paper>
 	);

@@ -15,6 +15,12 @@
         where status = '1'
         limit #{key_offset},#{size}
     </select>
+    <select id="getTotalCount" resultType="int">
+        select
+        count(0)
+        from resources
+        where status = '1'
+    </select>
     <select id="getById" parameterType="java.lang.Integer" resultType="cn.qx.sharepower.model.Resource">
         select
         <include refid="ALL_Column_List"/>

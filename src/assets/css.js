@@ -63,9 +63,8 @@ const cardListClass = makeStyles({
 			height: "auto"
 		}
 	},
-	more: {
-		width: "92.5%",
-		margin: "10px 0"
+	pagination: {
+		margin: theme.spacing(3)
 	}
 });
 

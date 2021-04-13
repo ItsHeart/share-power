@@ -3,8 +3,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
-import Button from "@material-ui/core/Button";
 import Skeleton from "react-loading-skeleton";
+import Pagination from "@material-ui/lab/Pagination";
 
 import theme from "../assets/theme";
 import { cardListClass } from "../assets/css";
@@ -17,7 +17,8 @@ export default function Resource() {
 	const classes = cardListClass();
 	const [cardData, setCardData] = useState([]);
 	const [skeleton, setSkeleton] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-	const [page, setPage] = useState(2);
+	const [now, setNow] = useState(1);
+	const [page, setPage] = useState(1);
 
 	useEffect(() => {
 		getList({
@@ -26,25 +27,23 @@ export default function Resource() {
 		})
 			.then((res) => {
 				setCardData(res.data);
+				setPage(Math.ceil(res.total / 10));
 				setSkeleton([]);
 			})
 			.catch(function (res) {});
 	}, []);
 
-	const loadMore = () => {
-		setSkeleton([0, 1, 2, 3, 4]);
+	const pageChange = (event, value) => {
+		setNow(value);
+		setCardData([]);
+		setSkeleton([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 		getList({
-			page: page,
-			size: 5
+			page: value - 1,
+			size: 10
 		})
 			.then((res) => {
-				setCardData((o) => {
-					let n = o;
-					return n.concat(res.data);
-				});
-				console.log(cardData);
+				setCardData(res.data);
 				setSkeleton([]);
-				setPage(page + 1);
 			})
 			.catch(function (res) {});
 	};
@@ -68,12 +67,15 @@ export default function Resource() {
 							</GridListTile>
 						))}
 					</GridList>
-					<Button
+
+					<Pagination
 						variant="outlined"
-						className={classes.more}
-						onClick={loadMore}>
-						more
-					</Button>
+						shape="rounded"
+						className={classes.pagination}
+						count={page}
+						page={now}
+						onChange={pageChange}
+					/>
 				</div>
 			</ThemeProvider>
 		</React.Fragment>
