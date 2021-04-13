@@ -43,10 +43,14 @@ export default function Resource() {
 		setNow(value);
 		setCardData([]);
 		setSkeleton([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-		getList({
-			page: value - 1,
-			size: param.size
-		})
+		getList(
+			Object.assign(
+				{
+					page: value - 1
+				},
+				param
+			)
+		)
 			.then((res) => {
 				setCardData(res.data);
 				setPage(Math.ceil(res.total / 10));
@@ -56,6 +60,8 @@ export default function Resource() {
 	};
 
 	const sortChange = () => {
+		setCardData([]);
+		setSkeleton([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 		getList(param)
 			.then((res) => {
 				setCardData(res.data);
