@@ -76,10 +76,13 @@ const detailClass = makeStyles({
 			display: "flex",
 			justifyContent: "space-between",
 			"& img": {
-				width: "50%"
+				width: "48vw"
+			},
+			"& .react-loading-skeleton": {
+				width: "48vw"
 			},
 			"& #description": {
-				width: "48%",
+				width: "48vw",
 				display: "flex",
 				flexDirection: "column",
 				position: "relative",
