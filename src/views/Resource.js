@@ -13,7 +13,7 @@ import SelectControl from "../component/SelectControl";
 import NoramlAppbar from "../component/NoramlAppbar";
 import { getList } from "@/api/resourceApi";
 
-export default function Resource() {
+export default function Resource(props) {
 	const classes = cardListClass();
 	const [cardData, setCardData] = useState([]);
 	const [skeleton, setSkeleton] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -25,6 +25,8 @@ export default function Resource() {
 		order: "0",
 		type: "0"
 	});
+
+	console.log(props.location.params);
 
 	useEffect(() => {
 		getList({

@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
@@ -27,7 +28,7 @@ export default function Search(props) {
 			margin: 4
 		},
 		type: {
-			padding: "0 6px",
+			padding: "0 10px 0 6px",
 			color: "#b3b3b3"
 		}
 	}));
@@ -35,23 +36,42 @@ export default function Search(props) {
 	const classes = useStyles();
 
 	const [selctType, setSelctType] = React.useState(0);
+	const [selctText, setSelctText] = React.useState("");
 
 	const _selctType = (value) => {
 		setSelctType(value);
 	};
 
+	const history = useHistory();
+
+	const search = () => {
+		history.push({
+			pathname: "/Resource",
+			params: {
+				type: selctType,
+				text: selctText
+			}
+		});
+	};
+
 	const enter = (event) => {
-		if (event && event.stopPropagation) {
-			event.stopPropagation();
+		if (event.keyCode === 13) {
+			search();
 		}
-		return false;
 	};
 
 	return (
-		<Paper component="form" className={classes.root}>
+		<Paper component="div" className={classes.root}>
 			<SearchMune data={selctType} setData={_selctType} />
-			<InputBase className={classes.input} placeholder="搜索" onKeyUp={enter} />
-			<IconButton className={classes.iconButton}>
+			<InputBase
+				className={classes.input}
+				placeholder="搜索"
+				onKeyUp={enter}
+				onChange={() => (event) => {
+					setSelctText(event.target.value);
+				}}
+			/>
+			<IconButton className={classes.iconButton} onClick={search}>
 				<SearchIcon />
 			</IconButton>
 			<Divider className={classes.divider} orientation="vertical" />
