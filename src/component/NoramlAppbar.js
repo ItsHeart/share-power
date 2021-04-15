@@ -33,7 +33,7 @@ export default function NoramlAppbar(props) {
 						</Button>
 					</Grid>
 					<Grid item xs={3}>
-						<FullSearch padding="0" iconPadding="0 5px" />
+						<FullSearch iconPadding="0 5px" padding="0" />
 					</Grid>
 				</Grid>
 				<Button

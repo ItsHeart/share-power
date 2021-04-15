@@ -12,7 +12,7 @@ import Divider from "@material-ui/core/Divider";
 export default function Search(props) {
 	const useStyles = makeStyles((theme) => ({
 		root: {
-			padding: "2px 4px",
+			padding: (props.padding ? "0" : "2px") + " 4px",
 			display: "flex",
 			alignItems: "center"
 		},
@@ -34,22 +34,27 @@ export default function Search(props) {
 	}));
 
 	const classes = useStyles();
-
-	const [selctType, setSelctType] = React.useState(0);
-	const [selctText, setSelctText] = React.useState("");
-
-	const _selctType = (value) => {
-		setSelctType(value);
-	};
-
 	const history = useHistory();
+
+	const [searchParm, setSearchParam] = React.useState({
+		type: 0,
+		text: ""
+	});
+
+	const _setType = (value) => {
+		setSearchParam((o) => {
+			let n = Object.assign({}, o);
+			n.type = value;
+			return n;
+		});
+	};
 
 	const search = () => {
 		history.push({
 			pathname: "/Resource",
 			params: {
-				type: selctType,
-				text: selctText
+				type: searchParm.type,
+				text: searchParm.text
 			}
 		});
 	};
@@ -62,13 +67,13 @@ export default function Search(props) {
 
 	return (
 		<Paper component="div" className={classes.root}>
-			<SearchMune data={selctType} setData={_selctType} />
+			<SearchMune data={searchParm.type} setData={_setType} />
 			<InputBase
 				className={classes.input}
 				placeholder="搜索"
 				onKeyUp={enter}
-				onChange={() => (event) => {
-					setSelctText(event.target.value);
+				onChange={(event) => {
+					setSearchParam({ ...searchParm, text: event.target.value });
 				}}
 			/>
 			<IconButton className={classes.iconButton} onClick={search}>
@@ -76,7 +81,11 @@ export default function Search(props) {
 			</IconButton>
 			<Divider className={classes.divider} orientation="vertical" />
 			<Typography component="span" className={classes.type}>
-				{selctType === "0" ? "全部" : selctType === "1" ? "PPT" : "资源"}
+				{searchParm.type === "0"
+					? "全部"
+					: searchParm.type === "1"
+					? "PPT"
+					: "资源"}
 			</Typography>
 		</Paper>
 	);

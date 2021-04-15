@@ -89,7 +89,7 @@ export default function Home() {
 							Let's Share <font color="#ff5722">Power</font>
 						</Box>
 					</Typography>
-					<FullSearch padding="2" iconPadding="10px" />
+					<FullSearch iconPadding="10px" />
 				</div>
 				<div className={cardClasses.root}>
 					<GridList cellHeight={320} spacing={15} cols={5}>
