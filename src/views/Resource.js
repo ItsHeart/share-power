@@ -5,6 +5,8 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import Skeleton from "react-loading-skeleton";
 import Pagination from "@material-ui/lab/Pagination";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 import theme from "../assets/theme";
 import { cardListClass } from "../assets/css";
@@ -13,70 +15,52 @@ import SelectControl from "../component/SelectControl";
 import NoramlAppbar from "../component/NoramlAppbar";
 import { getList } from "@/api/resourceApi";
 
+function Alert(props) {
+	return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 export default function Resource(props) {
 	const classes = cardListClass();
 	const [cardData, setCardData] = useState([]);
 	const [skeleton, setSkeleton] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-	const [now, setNow] = useState(1);
-	const [page, setPage] = useState(1);
 	const [param, setParam] = useState({
-		size: 10,
 		sort: "0",
 		order: "0",
-		type: "0"
+		type: props.location.params ? props.location.params.type : "0",
+		text: props.location.params ? props.location.params.text : ""
 	});
-
-	console.log(props.location.params);
+	const [page, setPage] = useState({
+		page: 0,
+		size: 10,
+		total: 1
+	});
+	//由于放到对象里，下一页按钮无法set成功，因此单独拿出来
+	const [now, setNow] = useState(1);
+	const [empty, setEmpty] = useState(false);
 
 	useEffect(() => {
-		getList({
-			page: 0,
-			size: 10
-		})
-			.then((res) => {
-				setCardData(res.data);
-				setPage(Math.ceil(res.total / 10));
-				setSkeleton([]);
-			})
-			.catch(function (res) {});
-	}, []);
-
-	/**
-	 * 页码变更reload
-	 */
-	const pageChange = (event, value) => {
-		setNow(value);
-		setCardData([]);
-		setSkeleton([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 		getList(
-			Object.assign(
-				{
-					page: value - 1
-				},
-				param
-			)
+			Object.assign(page, param, {
+				type: props.location.params ? props.location.params.type : "0",
+				text: props.location.params ? props.location.params.text : ""
+			})
 		)
 			.then((res) => {
 				setCardData(res.data);
-				setPage(Math.ceil(res.total / 10));
+				setPage({ ...page, total: Math.ceil(res.total / 10) });
 				setSkeleton([]);
+				console.log(res.data);
+				if (!res.data.length) {
+					setEmpty(true);
+				}
 			})
 			.catch(function (res) {});
-	};
+		// eslint-disable-next-line
+	}, [param, page.page, props.location.params]);
 
-	/**
-	 * 排序变更reload
-	 */
-	const sortChange = () => {
-		setCardData([]);
-		setSkeleton([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-		getList(param)
-			.then((res) => {
-				setCardData(res.data);
-				setPage(Math.ceil(res.total / 10));
-				setSkeleton([]);
-			})
-			.catch(function (res) {});
+	const pageChange = (event, value) => {
+		setNow(value);
+		setPage({ ...page, page: value - 1 });
 	};
 
 	const _setParam = (key, value) => {
@@ -92,7 +76,7 @@ export default function Resource(props) {
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<NoramlAppbar />
-				<SelectControl reload={sortChange} data={param} setData={_setParam} />
+				<SelectControl data={param} setData={_setParam} />
 				<div className={classes.root}>
 					<GridList cellHeight={320} spacing={10} cols={5}>
 						{cardData.map((card) => (
@@ -111,11 +95,25 @@ export default function Resource(props) {
 						variant="outlined"
 						shape="rounded"
 						className={classes.pagination}
-						count={page}
+						count={page.total}
 						page={now}
 						onChange={pageChange}
 					/>
 				</div>
+				<Snackbar
+					anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+					open={empty}
+					onClose={() => {
+						setEmpty(false);
+					}}>
+					<Alert
+						onClose={() => {
+							setEmpty(false);
+						}}
+						severity="warning">
+						搜索结果为空
+					</Alert>
+				</Snackbar>
 			</ThemeProvider>
 		</React.Fragment>
 	);

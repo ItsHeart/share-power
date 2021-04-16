@@ -37,7 +37,7 @@ export default function Search(props) {
 	const history = useHistory();
 
 	const [searchParm, setSearchParam] = React.useState({
-		type: 0,
+		type: "0",
 		text: ""
 	});
 

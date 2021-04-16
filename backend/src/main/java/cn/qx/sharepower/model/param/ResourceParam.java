@@ -13,4 +13,8 @@ public class ResourceParam {
     private String type;
     private String sort;
     private String order;
+    /**
+     * 搜索关键词
+     **/
+    private String text;
 }

@@ -16,6 +16,12 @@
         <if test="type == 1 or type == 2 ">
            and type = #{type}
         </if>
+        <if test="text != null ">
+            and (
+                title like concat('%',#{text},'%') or
+                `describe` like concat('%',#{text},'%')
+            )
+        </if>
         <if test="sort == 0">
             order by publish_time
         </if>
@@ -34,6 +40,12 @@
         where status = '1'
         <if test="type == 1 or type == 2 ">
             and type = #{type}
+        </if>
+        <if test="text != null ">
+            and (
+            title like concat('%',#{text},'%') or
+            `describe` like concat('%',#{text},'%')
+            )
         </if>
     </select>
     <select id="getById" parameterType="java.lang.Integer" resultType="cn.qx.sharepower.model.Resource">

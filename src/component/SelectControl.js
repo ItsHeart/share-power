@@ -5,7 +5,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
@@ -22,10 +21,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SelectControl(props) {
 	const classes = useStyles();
-
-	const search = () => {
-		props.reload();
-	};
 
 	return (
 		<Paper className={classes.root}>
@@ -71,11 +66,6 @@ export default function SelectControl(props) {
 					<MenuItem value={"0"}>降序</MenuItem>
 					<MenuItem value={"1"}>升序</MenuItem>
 				</Select>
-			</FormControl>
-			<FormControl className={classes.search}>
-				<Button variant="outlined" onClick={search}>
-					重新搜索
-				</Button>
 			</FormControl>
 		</Paper>
 	);
