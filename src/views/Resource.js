@@ -39,6 +39,8 @@ export default function Resource(props) {
 	const [empty, setEmpty] = useState(false);
 
 	useEffect(() => {
+		setCardData([]);
+		setSkeleton([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 		getList(
 			Object.assign(page, param, {
 				type: props.location.params ? props.location.params.type : "0",
@@ -49,7 +51,6 @@ export default function Resource(props) {
 				setCardData(res.data);
 				setPage({ ...page, total: Math.ceil(res.total / 10) });
 				setSkeleton([]);
-				console.log(res.data);
 				if (!res.data.length) {
 					setEmpty(true);
 				}
